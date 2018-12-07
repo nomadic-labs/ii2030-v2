@@ -7,10 +7,10 @@ section#landing {
     align-items: flex-start;
     display: flex;
     justify-content: flex-start;
+    padding-bottom: 3rem;
 
     img.oversize {
       max-height: 80vh;
-      transform: translateX(-80px);
     }
 
     .ii2030-bubble {
@@ -582,7 +582,6 @@ section#cocreation_process {
 
     &.centered {
       text-align: center;
-      display: flex;
       justify-content: center;
     }
 

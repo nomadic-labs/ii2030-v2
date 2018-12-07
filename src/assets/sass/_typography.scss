@@ -10,11 +10,6 @@ body {
   line-height: $base-line-height;
 
   h1, h2 {
-    font-family: $title-font;
-    text-transform: uppercase;
-    color: $orange;
-    margin: 0;
-
     &.subtitle {
       text-align: center;
       margin-bottom: $lg-spacing;

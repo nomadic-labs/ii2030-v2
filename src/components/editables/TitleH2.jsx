@@ -5,22 +5,15 @@ import Typography from "@material-ui/core/Typography";
 import Editable from "./Editable";
 import PlainTextEditor from "../editingTools/PlainTextEditor";
 
-const variantLookup = {
-  h1: 'display1',
-  h2: 'display2',
-  h3: 'display3',
-}
-
-const TitleH1 = props => {
+const Subtitle = props => {
   const handleSave = newContent => {
     props.onSave(newContent);
   };
 
   const { text } = props.content;
-  const variant = variantLookup[props.level];
 
   return (
-    <Typography variant={ variant || 'display1' } gutterBottom>
+    <Typography variant="display2" gutterBottom>
       <Editable
         editor={PlainTextEditor}
         handleSave={handleSave}
@@ -33,14 +26,14 @@ const TitleH1 = props => {
   );
 };
 
-TitleH1.propTypes = {
+Subtitle.propTypes = {
   content: PropTypes.shape({ text: PropTypes.string }).isRequired,
   onSave: PropTypes.func.isRequired,
 }
 
-TitleH1.defaultProps = {
+Subtitle.defaultProps = {
   content: { text: 'Placeholder' },
   onSave: newContent => console.log('Implement a function to save changes!', newContent),
 }
 
-export default TitleH1;
+export default Subtitle;

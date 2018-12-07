@@ -50,11 +50,10 @@ const theme = createMuiTheme({
       fontWeight: 700,
     },
     display3: {
-      fontFamily: `'Roboto Condensed', cursive`,
+      fontFamily: `'Roboto', Helvetica, Arial, sans-serif`,
       letterSpacing: "0.05rem",
-      textTransform: "uppercase",
-      fontSize: "1.667em",
-      color: '#DA900A',
+      fontSize: "1.4em",
+      color: '#2F4858',
       fontWeight: 700,
     },
     display4: {

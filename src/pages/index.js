@@ -7,8 +7,10 @@ import {
 } from "../redux/actions";
 
 import Grid from "@material-ui/core/Grid"
+import Slider from 'react-slick'
 
 import Layout from "../layouts/default.js";
+import Section from "../layouts/Section";
 import Editable from "../components/editables/Editable";
 import Title from "../components/editables/Title";
 import PlainTextEditor from "../components/editingTools/PlainTextEditor";
@@ -17,17 +19,15 @@ import RichTextEditor from "../components/editingTools/RichTextEditor";
 import OverviewSlide from "../components/home/OverviewSlide"
 import TestimonialSlide from "../components/home/TestimonialSlide"
 import TrackCard from "../components/home/TrackCard"
-import HostCard from "../components/home/HostCard"
-import PartnerCard from "../components/home/PartnerCard"
-import ParticipantCard from "../components/home/ParticipantCard"
+import LogoDisplay from "../components/home/LogoDisplay"
+import Participant from "../components/home/Participant"
+import ProgramSlider from "../components/home/ProgramSlider"
 
 import endevaLogo from "../assets/images/logos/endeva.png"
 import headerImage from "../assets/images/head-with-bubble.png"
-import headIcon from "../assets/images/head-icon-standardized.png"
-import tourIcon from "../assets/images/tour-icon-standardized.png"
-import tourIconLabelled from "../assets/images/tour-icon-standardized-labelled.png"
-import factoryIcon from "../assets/images/factory-icon-standardized.png"
-import factoryIconLabelled from "../assets/images/factory-icon-standardized-labelled.png"
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 
 const mapDispatchToProps = dispatch => {
@@ -48,8 +48,8 @@ const mapStateToProps = state => {
 };
 
 class HomePage extends React.Component {
-  componentWillMount() {
-    console.log("props", this.props)
+  componentDidMount() {
+    console.log("component did mount", this.props)
     const initialPageData = {
       ...this.props.data.pages,
       content: JSON.parse(this.props.data.pages.content)
@@ -70,20 +70,20 @@ class HomePage extends React.Component {
     const cohosts = []
     const partners = []
     const participants = []
-    console.log("render", this.props)
+    console.log("content", content)
 
     return (
       <Layout>
 
         <main>
-          <section id="landing">
+          <Section id="landing">
             <div className="outer-container vert-center">
               <Grid container>
                 <Grid item md={6} className="pure-u-1 pure-u-md-1-2 vert-center on-top">
                   <div className="horiz-spacing vert-spacing">
-                    <Title text={content["demo-title"].text} />
+                    <Title level="h1" content={ content["landing-title"] } onSave={this.onSave('landing-title')} />
                     <div className="vert-spacing">
-                      <h3>A heartfelt thank you to all of the inspiring innovators who contributed to making ii2030 a resounding success!</h3>
+                      <Title level="h3" content={ content["landing-subtitle"] } onSave={this.onSave('landing-subtitle')} />
                       <p className="bold"></p>
                     </div>
                     <a data-scroll href="#overview">
@@ -96,9 +96,9 @@ class HomePage extends React.Component {
                 </Grid>
               </Grid>
             </div>
-          </section>
+          </Section>
 
-          <section id="overview">
+          <Section id="overview">
             <header>
               <h2 className="subtitle"><span className="underlined">Event Overview</span></h2>
               <div className="headline vert-spacing">
@@ -107,16 +107,18 @@ class HomePage extends React.Component {
                 </span>
               </div>
             </header>
-            <div className="outer-container slide-container background-container dark">
+            <div className="outer-container background-container dark">
+              <Slider>
               {
                 overviewSlides.map((slide, i) => {
                   return <OverviewSlide key={`slide-${i}`} slide={slide} />
                 })
               }
+              </Slider>
             </div>
-          </section>
+          </Section>
 
-          <section id="timeline">
+          <Section id="timeline">
             <header>
               <h2 className="subtitle">
                 <span className="underlined">2017 Testimonials</span>
@@ -134,9 +136,9 @@ class HomePage extends React.Component {
                 })
               }
             </div>
-          </section>
+          </Section>
 
-          <section id="tracks">
+          <Section id="tracks">
             <header>
               <h2 className="subtitle"><span className="underlined">2017 Tracks</span></h2>
               <p className="headline vert-spacing">The interactive event employs technology as the engine to manufacture solutions for <span className="bold">tomorrow’s biggest challenges.</span></p>
@@ -150,78 +152,55 @@ class HomePage extends React.Component {
                 }
               </div>
             </div>
-          </section>
+          </Section>
 
-          <section id="agenda">
+          <Section id="agenda">
             <header>
               <h2 className="subtitle"><span className="underlined">Program</span></h2>
-              <div className="headline">
-                <div className="day-selector">
-                  <button data-day="day-1" className="btn btn-day1 white active day-1">Day 1: Tour</button>
-                  <button data-day="day-2" className="btn btn-day2 white day-2">Day 2: Factory</button>
-                </div>
-              </div>
             </header>
-            <div className="outer-container slide-container">
+            <ProgramSlider />
+          </Section>
 
-              <div className="slide tour-agenda">
-                <Grid container>
-                  <Grid item xs={12} md={6}>
-                    <div className="image oversize">
-                      <img src={headIcon} alt="Robot head" className="pure-img robot-head" />
-                      <img src={tourIconLabelled} alt="Robot body" className="pure-img animate-move-right active robot-body" />
-                      <img src={factoryIcon} alt="Robot feet" className="pure-img animate-move-right robot-feet" />
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} md={6} className="agenda-item vert-center">
-                    <div className="text vert-spacing horiz-spacing">
-                      <div className="text">
-                        <div className="vert-spacing">
-                          <h3 className="agenda-title">Inclusive Innovation Tour</h3>
-                          <small className="agenda-date bold">Date - location</small>
-                          <p className="agenda-description vert-spacing">Several tour guides take participants on an exploration of Berlin’s buzzing inclusive innovation scene to provide inspiration and information around the ii2030 challenges.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </Grid>
-                </Grid>
-              </div>
-
-              <div className="slide factory-agenda">
-                 <Grid container>
-                  <Grid item xs={12} md={6}>
-                    <div className="image oversize">
-                      <img src={headIcon} alt="Robot head" className="pure-img" />
-                      <img src={tourIcon} alt="Robot body" className="pure-img animate-move-right" />
-                      <img src={factoryIconLabelled} alt="Robot feet" className="pure-img animate-move-right active" />
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} md={6} className="agenda-item vert-center">
-                    <div className="text vert-spacing horiz-spacing">
-                      <div className="text">
-                        <div className="vert-spacing">
-                          <h3 className="agenda-title">Inclusive Innovation Factory</h3>
-                          <small className="agenda-date bold">Date - location</small>
-                          <p className="agenda-description vert-spacing">In design-thinking workshops of up to 10 participants, we work out how technology can drive inclusive innovation, and what is needed to realize solutions. Participants are carefully selected to bring together those actors who can make the change - and only those.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </Grid>
-                </Grid>
-
-              </div>
-            </div>
-          </section>
-
-            <section id="cocreation_process">
+            <Section id="cocreation_process">
             <header>
               <h2 className="subtitle">
                 <span className="underlined">ii2030 Co-creation Process</span>
               </h2>
             </header>
-          </section>
+            <Grid container spacing={24} className="tour-stops">
+              <Grid item xs={12} md={4}>
+                <div className="content-container centered">
+                    <div className="image">
+                      <img src="/images/chat.png" alt="" className="pure-img" />
+                    </div>
+                    <h3 className="title">Before ii2030</h3>
+                    <p className="description">Four weeks ahead of ii2030, we kick off the co-creation process online. Together with fellow participants, you have the chance to connect with a community of social innovators and entrepreneurs. Get valuable input from experts in your field and inspiration for the Inclusive Innovation Factory!</p>
+                </div>
+              </Grid>
 
-          <section id="partners">
+              <Grid item xs={12} md={4}>
+                <div className="content-container centered">
+                    <div className="image">
+                      <img src="/images/group.png" alt="" className="pure-img" />
+                    </div>
+                    <h3 className="title">During ii2030</h3>
+                    <p className="description">ii2030 draws inspiration from a hyper-focused and intensive service design process created by IXDS. This process, aided by mapping and storytelling, fosters the creation of technology-led solutions to address the SDGs. The methodology guides participants in their understanding of the challenges future users face. Through techniques that enhance their creativity, participants co-create new, holistic solutions that involve all needed stakeholders. The end-product of the workshop is a minimum viable prototype and a concrete roadmap to success.</p>
+                </div>
+              </Grid>
+
+              <Grid item xs={12} md={4}>
+                <div className="content-container centered">
+                    <div className="image">
+                      <img src="/images/rocket.png" alt="" className="pure-img" />
+                    </div>
+                    <h3 className="title">After ii2030</h3>
+                    <p className="description">Following ii2030, you have the opportunity to continue the co-creation process and implement your solution with guidance and follow-up support from Endeva and its partners. As a team, we move from refining our innovative visions towards realizing a pilot project within a year of ii2030.</p>
+                </div>
+              </Grid>
+            </Grid>
+          </Section>
+
+          <Section id="partners">
             <header>
               <h2 className="subtitle"><span className="underlined">Partners</span></h2>
             </header>
@@ -232,7 +211,7 @@ class HomePage extends React.Component {
               <h3>Co-hosted by </h3>
               {
                 cohosts.map((host, i) => {
-                  return <HostCard key={`host-${i}`} host={host} />
+                  return <LogoDisplay key={`host-${i}`} logo={host} />
                 })
               }
             </div>
@@ -240,25 +219,25 @@ class HomePage extends React.Component {
               <h3>Partners</h3>
               {
                 partners.map((partner, i) => {
-                  return <PartnerCard key={`partner-${i}`} partner={partner} />
+                  return <LogoDisplay key={`partner-${i}`} logo={partner} />
                 })
               }
             </div>
-          </section>
+          </Section>
 
 
-          <section id="participants">
+          <Section id="participants">
             <header>
               <h2 className="subtitle"><span className="underlined">2017 Participants</span></h2>
             </header>
             <div className="participants-slider slide-container">
               {
                 participants.map((participant, i) => {
-                  return <ParticipantCard key={`participant-${i}`} participant={participant} />
+                  return <Participant key={`participant-${i}`} participant={participant} />
                 })
               }
             </div>
-          </section>
+          </Section>
 
         </main>
 

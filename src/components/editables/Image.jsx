@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Editable from './Editable'
 import ImageEditor from '../editingTools/ImageEditor'
@@ -18,7 +19,7 @@ const styles = {
 
 const Image = (props) => {
   const handleSave = content => () => {
-    props.updateContent(props.sectionIndex, props.index, content)
+    props.handleSave(content)
   }
 
   return (
@@ -35,5 +36,11 @@ const Image = (props) => {
     </Editable>
   );
 };
+
+Image.propTypes = {
+  imageSrc: PropTypes.string.isRequired,
+  handleSave: PropTypes.func.isRequired,
+  caption: PropTypes.string,
+}
 
 export default Image;

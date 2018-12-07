@@ -4,20 +4,20 @@ import Grid from "@material-ui/core/Grid"
 
 const OverviewSlide = ({ slide }) => {
   return(
-    <div class="slide">
+    <div className="slide">
       <Grid container>
-        <Grid item xs={12} md={6} class="vert-center horiz-center">
-          <div class="image oversize">
-            <img src={ slide.img_path } alt="ii2030" class="pure-img" />
+        <Grid item xs={12} md={6} className="vert-center horiz-center">
+          <div className="image oversize">
+            <img src={ slide.imgSrc } alt="ii2030" className="pure-img" />
           </div>
         </Grid>
-        <Grid item xs={12} md={6} class="vert-center">
-          <div class="text horiz-spacing vert-spacing-lg">
+        <Grid item xs={12} md={6} className="vert-center">
+          <div className="text horiz-spacing vert-spacing-lg">
             <h2>{ slide.heading }</h2>
             <p>{ slide.text }</p>
             <p>
-              <i class="material-icons pause-btn">pause</i>
-              <i class="material-icons play-btn">skip_next</i>
+              <i className="material-icons pause-btn">pause</i>
+              <i className="material-icons play-btn">skip_next</i>
             </p>
           </div>
         </Grid>
@@ -25,6 +25,5 @@ const OverviewSlide = ({ slide }) => {
     </div>
   )
 }
-
 
 export default OverviewSlide;
