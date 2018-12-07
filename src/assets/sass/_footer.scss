@@ -1,0 +1,31 @@
+footer {
+  background-color: $white;
+  box-shadow: -2px -2px 2px 0px rgba(0, 0, 0, 0.1);
+  padding: $md-spacing;
+
+  p {
+    font-size: 14px;
+  }
+
+  .footer-right {
+    text-align: right;
+  }
+
+  .column-header {
+    color: $dark-red;
+    font-weight: 800;
+    font-size: $sm-size;
+  }
+
+  .site-map-item {
+    margin-top: 0;
+  }
+
+  .sub-nav {
+    padding-left: $sm-spacing;
+  }
+
+  .pure-menu-disabled {
+    padding: 0;
+  }
+}

@@ -1,7 +1,8 @@
 import React from "react";
-import { push, Link } from "gatsby";
+import { push } from "gatsby";
 import firebase from "../../firebase/init";
 import { connect } from "react-redux";
+import Button from "@material-ui/core/Button"
 
 import {
   userLoggedIn,
@@ -14,9 +15,13 @@ import {
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import RegistrationModal from "./RegistrationModal";
 
 const styles = {
+  container: {
+    position: "fixed",
+    left: "10px",
+    bottom: "10px",
+  },
   iconLabel: {
     display: "flex",
     alignItems: "center"
@@ -66,10 +71,6 @@ class AccountButton extends React.Component {
     push("/");
   };
 
-  login = e => {
-    this.props.onToggleRegistrationModal();
-  };
-
   openMenu = e => {
     this.setState({ anchorEl: e.currentTarget });
   };
@@ -79,7 +80,7 @@ class AccountButton extends React.Component {
   };
 
   render() {
-    const { props, openMenu, closeMenu, logout, login } = this;
+    const { props, openMenu, closeMenu, logout } = this;
     const { anchorEl } = this.state;
 
     if (props.isLoggedIn) {
@@ -88,9 +89,9 @@ class AccountButton extends React.Component {
         : "Account";
       const toggleText = props.isEditingPage ? "Done editing" : "Start editing";
       return (
-        <div>
-          <div
-            className="highlight-button-black-border btn btn-small no-margin inner-link"
+        <div style={styles.container}>
+          <Button
+            variant="contained"
             onClick={openMenu}
             aria-owns={anchorEl ? "account-menu" : null}
             aria-haspopup="true"
@@ -99,26 +100,13 @@ class AccountButton extends React.Component {
               {accountName}
               <ArrowDropDown style={{ height: "14px" }} />
             </span>
-          </div>
+          </Button>
           <Menu
             id="account-menu"
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={closeMenu}
           >
-            {props.allowEditing && (
-              <MenuItem
-                onClick={() => {
-                  closeMenu();
-                }}
-                component={Link}
-                to={'/project-review'}
-                divider
-              >
-                Review submitted projects
-              </MenuItem>
-            )}
-
             {props.allowEditing && (
               <MenuItem
                 onClick={() => {
@@ -156,20 +144,7 @@ class AccountButton extends React.Component {
       );
     }
 
-    return (
-      <span>
-        <div
-          className="highlight-button-black-border btn btn-small no-margin inner-link"
-          onClick={login}
-        >
-          <span style={styles.iconLabel}>Sign In / Sign Up</span>
-        </div>
-        <RegistrationModal
-          open={Boolean(props.showRegistrationModal)}
-          onToggleRegistrationModal={props.onToggleRegistrationModal}
-        />
-      </span>
-    );
+    return null
   }
 }
 

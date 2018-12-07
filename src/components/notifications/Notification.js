@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { closeNotification } from "../redux/actions";
+import { closeNotification } from "../../redux/actions";
 
 import Snackbar from "@material-ui/core/Snackbar";
 

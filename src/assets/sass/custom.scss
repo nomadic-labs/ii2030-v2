@@ -1,7 +1,17 @@
 @import "variables";
+@import "mixins";
 @import "typography";
 @import "menu";
 @import "loader";
+@import "base";
+@import "navbar";
+@import "footer";
+@import "home";
+@import "tracks";
+@import "responsive";
+@import "animations";
+@import "faqs";
+
 
 
 .large {

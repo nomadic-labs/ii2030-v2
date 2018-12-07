@@ -13,9 +13,6 @@ const uiConfig = {
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     firebase.auth.EmailAuthProvider.PROVIDER_ID,
   ],
-  callbacks: {
-    signInSuccess: () => {false}
-  },
   credentialHelper: 'NONE',
   callbacks: {
       signInSuccess: () => navigateTo('/')
@@ -32,13 +29,10 @@ const styles = {
 }
 
 class LoginPage extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 
-  componentWillMount() {
+  componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      console.log('logged in1', user)
+      console.log('logged in!', user)
       if (user) {
         const ref = firebase
           .app()

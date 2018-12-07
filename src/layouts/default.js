@@ -3,6 +3,7 @@ import Helmet from "react-helmet";
 import withRoot from '../utils/withRoot';
 
 import Notification from "../components/notifications/Notification";
+import AccountButton from "../components/navigation/AccountButton"
 
 import "../assets/sass/custom.scss";
 import favicon from '../assets/images/icon.png'
@@ -32,7 +33,8 @@ const DefaultLayout = props => (
       />
       <link rel="icon" href={favicon} type="image/x-icon" />
     </Helmet>
-    <NotificationContainer />
+    <Notification />
+    <AccountButton />
     <div className='page-content' style={styles.content}>{props.children}</div>
   </div>
 );

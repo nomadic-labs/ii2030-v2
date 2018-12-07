@@ -33,28 +33,28 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const NavigationComponent = props => (
-  <StaticQuery
-    query={graphql`
-      query {
-        allPages {
-          edges {
-            node {
-              title
-              slug
-              navigation {
-                order
-                displayTitle
-              }
-            }
-          }
-        }
-      }
-    `}
-    render={data => (
-      <Navigation {...props} pages={data.allPages.edges} />
-    )}
-  />
-);
+// const NavigationComponent = props => (
+//   <StaticQuery
+//     query={graphql`
+//       query {
+//         allPages {
+//           edges {
+//             node {
+//               title
+//               slug
+//               navigation {
+//                 order
+//                 displayTitle
+//               }
+//             }
+//           }
+//         }
+//       }
+//     `}
+//     render={data => (
+//       <Navigation {...props} pages={data.allPages.edges} />
+//     )}
+//   />
+// );
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavigationComponent);
