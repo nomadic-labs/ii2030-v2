@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
+import { showNotification } from "../../redux/actions";
 import EditorWrapper from "../editingTools/EditorWrapper";
 
 class Editable extends React.Component {
@@ -23,6 +24,11 @@ class Editable extends React.Component {
     this.props.handleSave(this.editor.state.content);
   };
 
+  handleError = (err) => {
+    this.toggleEditing();
+    this.props.showNotification(err)
+  }
+
   render() {
     console.log(this.props.children)
     if (this.props.isEditingPage) {
@@ -40,6 +46,7 @@ class Editable extends React.Component {
           {this.state.isEditing && (
             <Editor
               handleChange={this.props.handleChange}
+              handleError={this.handleError}
               ref={editor => (this.editor = editor)}
               content={this.props.content}
               { ...this.props }
@@ -60,6 +67,14 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    showNotification: message => {
+      dispatch(showNotification(message))
+    }
+  }
+}
+
 
 Editable.propTypes = {
   editor: PropTypes.func.isRequired,
@@ -67,4 +82,4 @@ Editable.propTypes = {
   content: PropTypes.object,
 };
 
-export default connect(mapStateToProps, null)(Editable);
+export default connect(mapStateToProps, mapDispatchToProps)(Editable);

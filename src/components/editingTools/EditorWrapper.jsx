@@ -2,6 +2,7 @@ import React from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
+import CloseIcon from "@material-ui/icons/Close";
 
 const innerContentStyles = {
   editContainer: {
@@ -75,6 +76,13 @@ const EditorWrapper = props => {
             onClick={props.handleSave}
           >
             <CheckIcon />
+          </div>
+          <div
+            className="cancel-icon"
+            style={styles.button}
+            onClick={props.toggleEditing}
+          >
+            <CloseIcon />
           </div>
         </div>
       )}

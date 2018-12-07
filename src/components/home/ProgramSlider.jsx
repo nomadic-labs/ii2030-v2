@@ -24,8 +24,8 @@ export default class ProgramSlider extends React.Component {
     return(
       <div>
         <div className="day-selector">
-          <button data-day="day-1" className={`btn btn-day1 white day-1 ${(this.state.slideIndex == 0) && 'active'}`} onClick={() => this.goToSlide(0)}>Day 1: Tour</button>
-          <button data-day="day-2" className={`btn btn-day2 white day-2 ${(this.state.slideIndex == 1) && 'active'}`} onClick={() => this.goToSlide(1)}>Day 2: Factory</button>
+          <button data-day="day-1" className={`btn btn-day1 white day-1 ${(this.state.slideIndex === 0) && 'active'}`} onClick={() => this.goToSlide(0)}>Day 1: Tour</button>
+          <button data-day="day-2" className={`btn btn-day2 white day-2 ${(this.state.slideIndex === 1) && 'active'}`} onClick={() => this.goToSlide(1)}>Day 2: Factory</button>
         </div>
 
         <Slider arrows={false} infinite={false} ref={slider => (this.slider = slider)}>

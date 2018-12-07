@@ -23,7 +23,7 @@ const styles = theme => ({
     marginBottom: "1rem"
   },
   hidden: {
-    display: 'none !important',
+    display: "none !important"
   }
 });
 
@@ -100,16 +100,22 @@ class ImageEditor extends React.Component {
 
     const fileRef = storage.child(`images/${image.name}`);
 
-    fileRef.put(image).then(snapshot => {
-      this.setState({
-        preview: snapshot.downloadURL,
-        loading: false,
-        content: {
-          ...this.state.content,
-          imageSrc: snapshot.downloadURL
-        }
-      });
-    });
+    fileRef
+      .put(image)
+      .then(snapshot => {
+        this.setState({
+          preview: snapshot.downloadURL,
+          loading: false,
+          content: {
+            ...this.state.content,
+            imageSrc: snapshot.downloadURL
+          }
+        });
+      })
+      .catch(err => {
+        console.log(err)
+        this.props.handleError(err.message)
+      })
   }
 
   render() {

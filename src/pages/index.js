@@ -11,20 +11,18 @@ import Slider from 'react-slick'
 
 import Layout from "../layouts/default.js";
 import Section from "../layouts/Section";
-import Editable from "../components/editables/Editable";
 import Title from "../components/editables/Title";
-import PlainTextEditor from "../components/editingTools/PlainTextEditor";
-import RichTextEditor from "../components/editingTools/RichTextEditor";
+import Paragraph from "../components/editables/Paragraph";
+import Image from "../components/editables/Image";
 
 import OverviewSlide from "../components/home/OverviewSlide"
-import TestimonialSlide from "../components/home/TestimonialSlide"
+import TimelineSlide from "../components/home/TimelineSlide"
 import TrackCard from "../components/home/TrackCard"
 import LogoDisplay from "../components/home/LogoDisplay"
 import Participant from "../components/home/Participant"
 import ProgramSlider from "../components/home/ProgramSlider"
 
 import endevaLogo from "../assets/images/logos/endeva.png"
-import headerImage from "../assets/images/head-with-bubble.png"
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -66,7 +64,7 @@ class HomePage extends React.Component {
     const content = this.props.pageData ? this.props.pageData.content : {};
     const tracks = []
     const overviewSlides = []
-    const testimonials = []
+    const timelineSlides = []
     const cohosts = []
     const partners = []
     const participants = []
@@ -92,18 +90,18 @@ class HomePage extends React.Component {
                   </div>
                 </Grid>
                 <Grid item md={6} className="pure-u-1 pure-u-md-1-2 image-container">
-                  <img src={headerImage} alt="Robot head" className="pure-img oversize" />
+                  <Image content={ content["landing-image"] } onSave={this.onSave('landing-image')} />
                 </Grid>
               </Grid>
             </div>
           </Section>
 
           <Section id="overview">
-            <header>
-              <h2 className="subtitle"><span className="underlined">Event Overview</span></h2>
+            <header className="text-center">
+              <Title level="h2" content={ content["overview-title"] } onSave={this.onSave('overview-title')} />
               <div className="headline vert-spacing">
                 <span className="headline-container">
-                  ii2030 brings together innovators from corporates, startups, the public sector, NGOs and science to create solutions for a more inclusive society by 2030.
+                  <Paragraph content={ content["overview-subtitle"] } onSave={this.onSave('overview-subtitle')} />
                 </span>
               </div>
             </header>
@@ -119,10 +117,8 @@ class HomePage extends React.Component {
           </Section>
 
           <Section id="timeline">
-            <header>
-              <h2 className="subtitle">
-                <span className="underlined">2017 Testimonials</span>
-              </h2>
+            <header className="text-center">
+              <Title level="h2" content={ content["timeline-title"] } onSave={this.onSave('timeline-title')} />
             </header>
             <div className="timeline">
               <div className="stop-dots">
@@ -131,17 +127,21 @@ class HomePage extends React.Component {
             </div>
             <div className="pure-g tour-stops slide-container">
               {
-                testimonials.map((testimonial, i) => {
-                  return <TestimonialSlide key={`testimonial-${i}`} testimonial={testimonial} />
+                timelineSlides.map((slide, i) => {
+                  return <TimelineSlide key={`timeline-${i}`} slide={slide} />
                 })
               }
             </div>
           </Section>
 
           <Section id="tracks">
-            <header>
-              <h2 className="subtitle"><span className="underlined">2017 Tracks</span></h2>
-              <p className="headline vert-spacing">The interactive event employs technology as the engine to manufacture solutions for <span className="bold">tomorrow’s biggest challenges.</span></p>
+            <header className="text-center">
+              <Title level="h2" content={ content["tracks-title"] } onSave={this.onSave('tracks-title')} />
+              <div className="headline vert-spacing">
+                <span className="headline-container">
+                  <Paragraph className="headline" content={ content["tracks-subtitle"] } onSave={this.onSave('tracks-subtitle')} />
+                </span>
+              </div>
             </header>
             <div className="content background-container">
               <div className="pure-g tracks">
@@ -155,17 +155,15 @@ class HomePage extends React.Component {
           </Section>
 
           <Section id="agenda">
-            <header>
-              <h2 className="subtitle"><span className="underlined">Program</span></h2>
+            <header className="text-center">
+              <Title level="h2" content={ content["agenda-title"] } onSave={this.onSave('agenda-title')} />
             </header>
             <ProgramSlider />
           </Section>
 
             <Section id="cocreation_process">
-            <header>
-              <h2 className="subtitle">
-                <span className="underlined">ii2030 Co-creation Process</span>
-              </h2>
+            <header className="text-center">
+              <Title level="h2" content={ content["process-title"] } onSave={this.onSave('process-title')} />
             </header>
             <Grid container spacing={24} className="tour-stops">
               <Grid item xs={12} md={4}>
@@ -173,8 +171,8 @@ class HomePage extends React.Component {
                     <div className="image">
                       <img src="/images/chat.png" alt="" className="pure-img" />
                     </div>
-                    <h3 className="title">Before ii2030</h3>
-                    <p className="description">Four weeks ahead of ii2030, we kick off the co-creation process online. Together with fellow participants, you have the chance to connect with a community of social innovators and entrepreneurs. Get valuable input from experts in your field and inspiration for the Inclusive Innovation Factory!</p>
+                    <Title level="h3" content={ content["process-step1-title"] } onSave={this.onSave('process-step1-title')} />
+                    <Paragraph content={ content["process-step1-description"] } onSave={this.onSave('process-step1-description')} />
                 </div>
               </Grid>
 
@@ -183,8 +181,8 @@ class HomePage extends React.Component {
                     <div className="image">
                       <img src="/images/group.png" alt="" className="pure-img" />
                     </div>
-                    <h3 className="title">During ii2030</h3>
-                    <p className="description">ii2030 draws inspiration from a hyper-focused and intensive service design process created by IXDS. This process, aided by mapping and storytelling, fosters the creation of technology-led solutions to address the SDGs. The methodology guides participants in their understanding of the challenges future users face. Through techniques that enhance their creativity, participants co-create new, holistic solutions that involve all needed stakeholders. The end-product of the workshop is a minimum viable prototype and a concrete roadmap to success.</p>
+                    <Title level="h3" content={ content["process-step2-title"] } onSave={this.onSave('process-step2-title')} />
+                    <Paragraph content={ content["process-step2-description"] } onSave={this.onSave('process-step2-description')} />
                 </div>
               </Grid>
 
@@ -193,19 +191,19 @@ class HomePage extends React.Component {
                     <div className="image">
                       <img src="/images/rocket.png" alt="" className="pure-img" />
                     </div>
-                    <h3 className="title">After ii2030</h3>
-                    <p className="description">Following ii2030, you have the opportunity to continue the co-creation process and implement your solution with guidance and follow-up support from Endeva and its partners. As a team, we move from refining our innovative visions towards realizing a pilot project within a year of ii2030.</p>
+                    <Title level="h3" content={ content["process-step3-title"] } onSave={this.onSave('process-step3-title')} />
+                    <Paragraph content={ content["process-step3-description"] } onSave={this.onSave('process-step3-description')} />
                 </div>
               </Grid>
             </Grid>
           </Section>
 
           <Section id="partners">
-            <header>
-              <h2 className="subtitle"><span className="underlined">Partners</span></h2>
+            <header className="text-center">
+              <Title level="h2" content={ content["partners-title"] } onSave={this.onSave('partners-title')} />
             </header>
             <div className="host partner-group headline">
-              <h3>An <a href="http://www.endeva.org/" target="_blank"><img id="endeva-logo" src={endevaLogo} alt="Endeva logo" /></a> initiative</h3>
+              <h3>An <a href="http://www.endeva.org/" target="_blank" rel="noopener noreferrer"><img id="endeva-logo" src={endevaLogo} alt="Endeva logo" /></a> initiative</h3>
             </div>
             <div className="partner-group headline">
               <h3>Co-hosted by </h3>
@@ -227,8 +225,8 @@ class HomePage extends React.Component {
 
 
           <Section id="participants">
-            <header>
-              <h2 className="subtitle"><span className="underlined">2017 Participants</span></h2>
+            <header className="text-center">
+              <Title level="h2" content={ content["participants-title"] } onSave={this.onSave('participants-title')} />
             </header>
             <div className="participants-slider slide-container">
               {

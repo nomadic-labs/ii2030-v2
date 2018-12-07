@@ -18,8 +18,8 @@ const styles = {
 
 
 const Image = (props) => {
-  const handleSave = content => () => {
-    props.handleSave(content)
+  const handleSave = content => {
+    props.onSave(content)
   }
 
   return (
@@ -41,6 +41,11 @@ Image.propTypes = {
   imageSrc: PropTypes.string.isRequired,
   handleSave: PropTypes.func.isRequired,
   caption: PropTypes.string,
+}
+
+Image.defaultProps = {
+  imageSrc: '/images/head-with-bubble.png',
+  onSave: content => console.log('Implement a function to save changes!', content),
 }
 
 export default Image;

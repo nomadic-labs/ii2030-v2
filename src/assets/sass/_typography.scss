@@ -29,7 +29,6 @@ body {
   }
 
   p {
-    font-size: $base-size;
     margin: 0.5em 0;
   }
 
@@ -61,5 +60,9 @@ body {
   .underlined {
     border-bottom: 2px solid $light-blue;
     padding-bottom: $sm-spacing;
+  }
+
+  .text-center {
+    text-align: center;
   }
 }

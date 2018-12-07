@@ -11,7 +11,7 @@ const variantLookup = {
   h3: 'display3',
 }
 
-const TitleH1 = props => {
+const Title = props => {
   const handleSave = newContent => {
     props.onSave(newContent);
   };
@@ -33,14 +33,14 @@ const TitleH1 = props => {
   );
 };
 
-TitleH1.propTypes = {
+Title.propTypes = {
   content: PropTypes.shape({ text: PropTypes.string }).isRequired,
   onSave: PropTypes.func.isRequired,
 }
 
-TitleH1.defaultProps = {
+Title.defaultProps = {
   content: { text: 'Placeholder' },
   onSave: newContent => console.log('Implement a function to save changes!', newContent),
 }
 
-export default TitleH1;
+export default Title;
