@@ -15,10 +15,12 @@ import Title from "../components/editables/Title";
 import Paragraph from "../components/editables/Paragraph";
 import Image from "../components/editables/Image";
 
-import IntroSlide from "../components/track/IntroSlide"
+import IntroSlides from "../components/track/IntroSlides"
+import TourStops from "../components/track/TourStops"
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
 
 
 const mapDispatchToProps = dispatch => {
@@ -92,13 +94,7 @@ class TrackTemplate extends React.Component {
           <Section id="track-description" className="background-container dark">
             <div className="outer-container">
               <div className="slider-nav"></div>
-              <Slider className="slide-container">
-                {
-                  introSlides.map((slide, i) => {
-                    return <IntroSlide key={`intro-slide-${i}`} slide={slide} />
-                  })
-                }
-              </Slider>
+              <IntroSlides slides={introSlides} />
             </div>
           </Section>
 
@@ -166,35 +162,8 @@ class TrackTemplate extends React.Component {
                         <Paragraph content={ content["tour-stops-subtitle"] } onSave={this.onSave('tour-stops-subtitle')} />
                       </div>
                     </header>
-                    <div className="timeline">
-                      <div className="stop-dots">
-                        <div className="line"></div>
-                      </div>
-                    </div>
 
-                    <Slider>
-
-                      {
-                        tourStops.map((stop, i) => {
-                          return (
-                            <div className="slide">
-                              <div className="content-container pure-g centered">
-                                <div className="pure-u-1">
-
-                                  <div className="image">
-                                    <img src={ stop.imageSrc } alt={ stop.organization } className="pure-img" />
-                                  </div>
-
-                                  <h3>{ stop.organization }</h3>
-                                  <p>{ stop.organization }</p>
-                                </div>
-                              </div>
-                            </div>
-                          )
-                        })
-                      }
-
-                    </Slider>
+                    <TourStops stops={tourStops} />
                   </section>
 
                 </div>
