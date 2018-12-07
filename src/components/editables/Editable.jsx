@@ -14,9 +14,9 @@ class Editable extends React.Component {
     this.setState({ isEditing: !this.state.isEditing });
   };
 
-  handleDelete = () => {
-    this.props.deleteContent(this.props.sectionIndex, this.props.index);
-  };
+  // handleDelete = () => {
+  //   this.props.deleteContent(this.props.sectionIndex, this.props.index);
+  // };
 
   handleSave = () => {
     this.toggleEditing();
@@ -78,6 +78,7 @@ const mapDispatchToProps = dispatch => {
 
 Editable.propTypes = {
   editor: PropTypes.func.isRequired,
+  handleSave: PropTypes.func.isRequired,
   handleChange: PropTypes.func,
   content: PropTypes.object,
 };

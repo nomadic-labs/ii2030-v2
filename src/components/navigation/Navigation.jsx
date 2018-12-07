@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
+import Grid from "@material-ui/core/Grid"
 
 const styles = {
   button: {
@@ -11,74 +12,57 @@ const styles = {
 }
 
 
-const Navigation = (props) => {
-  const menuItems = props.menuItems ? props.menuItems : []
-  return (
-    <div>
-      <nav className="navbar no-margin-bottom">
-        <div className="navigation-menu padding-two no-padding-top no-padding-bottom">
-          <div className="row">
-            <div className="col-lg-1 col-md-3 navbar-header">
-              <button
-                type="button"
-                className="navbar-toggle collapsed"
-                data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1"
-              >
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar" />
-                <span className="icon-bar" />
-                <span className="icon-bar" />
-              </button>
+class Navigation extends React.Component {
+  static = {
+    open: false
+  }
+
+  render() {
+    const navSections = this.props.menuItems ? this.props.menuItems : []
+    return (
+      <div className="custom-wrapper" id="menu">
+        <Grid container>
+          <Grid xs={12} md={6}>
+            <div className="pure-menu">
+                <Link to={'/'} className="pure-menu-heading menu-heading">ii2030</Link>
+                <a href="#" className="custom-toggle" id="toggle"><s className="bar"></s><s className="bar"></s></a>
             </div>
-            <div
-              className="col-lg-5 col-md-6 col-sm-9 collapse navbar-collapse"
-              id="bs-example-navbar-collapse-1"
-              style={styles.fullWidth}
-            >
-              <ul className="nav navbar-nav">
-                { menuItems.map(item => (
-                  <li key={item.url}>
-                    <Link
-                      to={`${item.url}`}
-                      className="inner-link text-medium"
-                      data-scroll
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <ul className="nav navbar-nav navbar-right">
-                <li>
-                  <Link
-                    className="btn-small-white btn btn-small no-margin inner-link"
-                    to="/project-form"
-                  >
-                    <span style={styles.button}>
-                      Submit a Project
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <a
-                    className="btn-small-white btn btn-small no-margin inner-link"
-                    href="https://www.fundscrip.com/support-a-group/XCS92G?GUID"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span style={styles.button}>
-                      Donate Now
-                    </span>
-                  </a>
-                </li>
+            <div className="pure-menu pure-menu-horizontal custom-can-transform">
+              <ul className="pure-menu-list">
+                {
+                  navSections.map((section, i) => {
+                    return
+                      { section.navs && section.navs.map((nav, i) => {
+                        return (
+                          <li className="pure-menu-item pure-menu-has-children pure-menu-allow-hover" key={`section-nav-${i}`}>
+                            <a className="pure-menu-link">{ nav.name }</a>
+                            <div key={`section-nav-${i}`}>
+                              <p className="site-map-item">{ nav.name }</p>
+                              { nav.subs && nav.subs.map((subnav, i) => (
+                                <div>
+                                  <img src={ subnav.icon } alt="icon" />
+                                  <a data-scroll href={subnav.link} className="">{ subnav.name }</a>
+                                </div>
+                              ))}
+                            </div>
+                          </li>
+                        )
+                      })}
+                  })
+                }
               </ul>
             </div>
-          </div>
-        </div>
-      </nav>
-    </div>
-  );
+          </Grid>
+          <Grid xs={12} md={6}>
+            <div className="pure-menu pure-menu-horizontal custom-can-transform pull-right">
+              <a href="https://www.linkedin.com/company/endeva/"
+              className="pure-menu-heading registration">Read our latest blogposts here!</a>
+            </div>
+          </Grid>
+        </Grid>
+      </div>
+    );
+  }
 }
 
 export default Navigation;

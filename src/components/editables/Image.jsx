@@ -39,7 +39,7 @@ const Image = (props) => {
 
 Image.propTypes = {
   imageSrc: PropTypes.string.isRequired,
-  handleSave: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
   caption: PropTypes.string,
 }
 

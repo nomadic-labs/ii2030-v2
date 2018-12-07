@@ -7,12 +7,12 @@ import Button from "@material-ui/core/Button"
 import {
   userLoggedIn,
   userLoggedOut,
-  toggleRegistrationModal,
   deploy,
   toggleEditing
 } from "../../redux/actions";
 
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
+import SettingsIcon from "@material-ui/icons/Settings";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 
@@ -37,6 +37,7 @@ class AccountButton extends React.Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        console.log('logged in!')
         const ref = firebase
           .app()
           .database()
@@ -58,10 +59,6 @@ class AccountButton extends React.Component {
         });
       } else {
         this.props.userLoggedOut();
-      }
-
-      if (this.props.showRegistrationModal) {
-        this.props.onToggleRegistrationModal();
       }
     });
   }
@@ -93,11 +90,13 @@ class AccountButton extends React.Component {
         <div style={styles.container}>
           <Button
             variant="contained"
+            color="primary"
             onClick={openMenu}
             aria-owns={anchorEl ? "account-menu" : null}
             aria-haspopup="true"
           >
             <span style={styles.iconLabel}>
+              <SettingsIcon style={{ marginRight: "4px" }} />
               {accountName}
               <ArrowDropDown style={{ height: "14px" }} />
             </span>
@@ -155,7 +154,6 @@ const mapStateToProps = state => {
   return {
     isLoggedIn: state.adminTools.isLoggedIn,
     user: state.adminTools.user,
-    showRegistrationModal: state.adminTools.showRegistrationModal,
     isEditingPage: state.adminTools.isEditingPage,
     allowEditing: allowEditing
   };
@@ -168,9 +166,6 @@ const mapDispatchToProps = dispatch => {
     },
     userLoggedOut: () => {
       dispatch(userLoggedOut());
-    },
-    onToggleRegistrationModal: () => {
-      dispatch(toggleRegistrationModal());
     },
     onToggleEditing: () => {
       dispatch(toggleEditing());

@@ -4,6 +4,8 @@ import withRoot from '../utils/withRoot';
 
 import Notification from "../components/notifications/Notification";
 import AccountButton from "../components/navigation/AccountButton"
+import Navigation from "../components/navigation/Navigation"
+import Footer from "../components/navigation/Footer"
 
 import "../assets/sass/custom.scss";
 import favicon from '../assets/images/icon.png'
@@ -33,9 +35,11 @@ const DefaultLayout = props => (
       />
       <link rel="icon" href={favicon} type="image/x-icon" />
     </Helmet>
+    <Navigation />
     <Notification />
     <AccountButton />
     <div className='page-content' style={styles.content}>{props.children}</div>
+    <Footer />
   </div>
 );
 

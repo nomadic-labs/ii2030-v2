@@ -35,6 +35,15 @@ module.exports = {
               return node
             },
           },
+          {
+            type: "Tracks",
+            path: "tracks",
+            map: node => {
+              node.content = JSON.stringify(node.content);
+
+              return node
+            },
+          },
         ]
       }
     },

@@ -82,7 +82,6 @@ class HomePage extends React.Component {
                     <Title level="h1" content={ content["landing-title"] } onSave={this.onSave('landing-title')} />
                     <div className="vert-spacing">
                       <Title level="h3" content={ content["landing-subtitle"] } onSave={this.onSave('landing-subtitle')} />
-                      <p className="bold"></p>
                     </div>
                     <a data-scroll href="#overview">
                       <button className="btn orange animate">Learn more</button>
