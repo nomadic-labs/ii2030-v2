@@ -1,19 +1,26 @@
 import React from "react";
+import { Link } from "gatsby";
+import Grid from "@material-ui/core/Grid";
+
+import Image from "../editables/Image";
+import Title from "../editables/Title";
+import Paragraph from "../editables/Paragraph";
 
 
-const TrackCard = ({ track, active }) => {
+const TrackCard = ({ track, onSave }) => {
+  const trackData = track ? track.node : {};
+  console.log("track", track)
+  const content = trackData.content ? JSON.parse(trackData.content) : {};
+  console.log("content", content)
   return(
-    <div className="pure-u-1 pure-u-md-1-5">
-      <div className={`track ${active}`}>
-        <img src={ track.imgSrc } alt="icon" />
-        <h3>{ track.title }</h3>
-        <p>{ track.topic }</p>
-        { track.link ?
-          <a href={ track.link }><button className="btn white animate hide-unless-active">Learn more</button></a> :
-          <p className="hide-unless-active">- Coming soon -</p>
-        }
+    <Grid item xs={12} sm={6} md={3}>
+      <div className={`track text-center`}>
+        <Image content={ content["icon"] } onSave={ onSave } />
+        <Title level="h3" content={ content["tech"] } onSave={ onSave } />
+        <Paragraph content={ content["topic"] } onSave={ onSave } />
+        <Link to={ trackData["slug"] }><button className="btn white animate hide-unless-active">Learn more</button></Link>
       </div>
-    </div>
+    </Grid>
   )
 }
 

@@ -22,29 +22,30 @@ const Image = (props) => {
     props.onSave(content)
   }
 
+  const { imageSrc, caption } = props.content;
+
   return (
     <Editable
       editor={ImageEditor}
       handleSave={handleSave}
-      content={{ imageSrc: props.imageSrc, caption: props.caption }}
+      content={{ imageSrc: imageSrc, caption: caption }}
       { ...props }
     >
       <div className='img edit-container' style={styles.imageContainer}>
-        <img src={props.imageSrc} alt={props.caption} style={styles.image} />
-        <small>{props.caption}</small>
+        <img src={imageSrc} alt={caption} style={styles.image} />
+        <small>{caption}</small>
       </div>
     </Editable>
   );
 };
 
 Image.propTypes = {
-  imageSrc: PropTypes.string.isRequired,
+  content: PropTypes.shape({ imageSrc: PropTypes.string.isRequired, caption: PropTypes.string }).isRequired,
   onSave: PropTypes.func.isRequired,
-  caption: PropTypes.string,
 }
 
 Image.defaultProps = {
-  imageSrc: '/images/head-with-bubble.png',
+  content: { imageSrc: '/images/head-with-bubble.png' },
   onSave: content => console.log('Implement a function to save changes!', content),
 }
 

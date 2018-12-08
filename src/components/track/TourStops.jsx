@@ -1,6 +1,5 @@
 import React from 'react';
 import Slider from 'react-slick'
-import Grid from "@material-ui/core/Grid"
 
 export default class TourStops extends React.Component {
   state = {
@@ -27,7 +26,7 @@ export default class TourStops extends React.Component {
           {
             this.props.stops.map((stop, i) => {
               return(
-                <div className="slide">
+                <div className="slide" key={`tour-stop-${i}`}>
                   <div className="content-container pure-g centered">
                     <div className="pure-u-1">
 

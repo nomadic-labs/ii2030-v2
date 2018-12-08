@@ -2,12 +2,11 @@ import React from "react";
 import { graphql } from "gatsby";
 import { connect } from "react-redux";
 import {
-  updatePage,
+  updateTrack,
   loadPageData,
 } from "../redux/actions";
 
 import Grid from "@material-ui/core/Grid"
-import Slider from 'react-slick'
 
 import Layout from "../layouts/default.js";
 import Section from "../layouts/Section";
@@ -25,8 +24,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 const mapDispatchToProps = dispatch => {
   return {
-    onUpdatePageData: (page, id, data) => {
-      dispatch(updatePage(page, id, data));
+    onUpdateTrackData: (track, id, data) => {
+      dispatch(updateTrack(track, id, data));
     },
     onLoadPageData: data => {
       dispatch(loadPageData(data));
@@ -51,9 +50,9 @@ class TrackTemplate extends React.Component {
     this.props.onLoadPageData(initialPageData);
   }
 
-  onSave = id => content => {
-    const { pageId } = this.props.data.tracks;
-    this.props.onUpdatePageData(pageId, id, content);
+  onSave = fieldId => content => {
+    const { id } = this.props.data.tracks;
+    this.props.onUpdateTrackData(id, fieldId, content);
   };
 
   render() {

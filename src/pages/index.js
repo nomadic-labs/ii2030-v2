@@ -16,7 +16,7 @@ import Paragraph from "../components/editables/Paragraph";
 import Image from "../components/editables/Image";
 
 import OverviewSlide from "../components/home/OverviewSlide"
-import TimelineSlide from "../components/home/TimelineSlide"
+import TimelineSlider from "../components/home/TimelineSlider"
 import TrackCard from "../components/home/TrackCard"
 import LogoDisplay from "../components/home/LogoDisplay"
 import Participant from "../components/home/Participant"
@@ -47,7 +47,6 @@ const mapStateToProps = state => {
 
 class HomePage extends React.Component {
   componentDidMount() {
-    console.log("component did mount", this.props)
     const initialPageData = {
       ...this.props.data.pages,
       content: JSON.parse(this.props.data.pages.content)
@@ -62,13 +61,13 @@ class HomePage extends React.Component {
 
   render() {
     const content = this.props.pageData ? this.props.pageData.content : {};
-    const tracks = []
-    const overviewSlides = []
-    const timelineSlides = []
+    const overviewSlides = content["overview-slides"] || [];
+    const tracks = this.props.data ? this.props.data.allTracks.edges : [];
+    const timelineSlides = content["timeline-slides"] || [];
     const cohosts = []
     const partners = []
     const participants = []
-    console.log("content", content)
+    console.log("tracks", tracks)
 
     return (
       <Layout>
@@ -77,7 +76,7 @@ class HomePage extends React.Component {
           <Section id="landing">
             <div className="outer-container vert-center">
               <Grid container>
-                <Grid item md={6} className="pure-u-1 pure-u-md-1-2 vert-center on-top">
+                <Grid item xs={12} md={6} className="pure-u-1 pure-u-md-1-2 vert-center on-top">
                   <div className="horiz-spacing vert-spacing">
                     <Title level="h1" content={ content["landing-title"] } onSave={this.onSave('landing-title')} />
                     <div className="vert-spacing">
@@ -88,7 +87,7 @@ class HomePage extends React.Component {
                     </a>
                   </div>
                 </Grid>
-                <Grid item md={6} className="pure-u-1 pure-u-md-1-2 image-container">
+                <Grid item xs={12} md={6} className="pure-u-1 pure-u-md-1-2 image-container">
                   <Image content={ content["landing-image"] } onSave={this.onSave('landing-image')} />
                 </Grid>
               </Grid>
@@ -104,33 +103,22 @@ class HomePage extends React.Component {
                 </span>
               </div>
             </header>
-            <div className="outer-container background-container dark">
-              <Slider>
+          </Section>
+          <Section className="outer-container background-container dark">
+            <Slider>
               {
                 overviewSlides.map((slide, i) => {
                   return <OverviewSlide key={`slide-${i}`} slide={slide} />
                 })
               }
-              </Slider>
-            </div>
+            </Slider>
           </Section>
 
           <Section id="timeline">
             <header className="text-center">
               <Title level="h2" content={ content["timeline-title"] } onSave={this.onSave('timeline-title')} />
             </header>
-            <div className="timeline">
-              <div className="stop-dots">
-                <div className="line"></div>
-              </div>
-            </div>
-            <div className="pure-g tour-stops slide-container">
-              {
-                timelineSlides.map((slide, i) => {
-                  return <TimelineSlide key={`timeline-${i}`} slide={slide} />
-                })
-              }
-            </div>
+            <TimelineSlider slides={timelineSlides} />
           </Section>
 
           <Section id="tracks">
@@ -142,15 +130,15 @@ class HomePage extends React.Component {
                 </span>
               </div>
             </header>
-            <div className="content background-container">
-              <div className="pure-g tracks">
-                {
-                  tracks.map((track, i) => {
-                    return <TrackCard key={`track-${i}`} track={track} />
-                  })
-                }
-              </div>
-            </div>
+          </Section>
+          <Section className="content background-container">
+            <Grid container className="pure-g tracks">
+              {
+                tracks.map((node, i) => {
+                  return <TrackCard key={`track-${i}`} track={node} />
+                })
+              }
+            </Grid>
           </Section>
 
           <Section id="agenda">
@@ -248,11 +236,21 @@ export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
 
 export const query = graphql`
   query {
-    pages(id: { eq: "home" }) {
+    pages(id: {eq: "home"}) {
       id
       content
       title
       slug
+    }
+    allTracks(filter: { year: { eq: 2017 }}) {
+      edges {
+        node {
+          id
+          title
+          slug
+          content
+        }
+      }
     }
   }
 `;

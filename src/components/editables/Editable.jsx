@@ -20,7 +20,7 @@ class Editable extends React.Component {
 
   handleSave = () => {
     this.toggleEditing();
-    console.log('Editable', this.editor.state.content)
+    // console.log('Editable', this.editor.state.content)
     this.props.handleSave(this.editor.state.content);
   };
 
@@ -30,7 +30,6 @@ class Editable extends React.Component {
   }
 
   render() {
-    console.log(this.props.children)
     if (this.props.isEditingPage) {
       const Editor = this.props.editor;
 

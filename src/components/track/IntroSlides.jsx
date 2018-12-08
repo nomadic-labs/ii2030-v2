@@ -1,6 +1,5 @@
 import React from 'react';
 import Slider from 'react-slick'
-import Grid from "@material-ui/core/Grid"
 
 export default class IntroSlides extends React.Component {
   state = {

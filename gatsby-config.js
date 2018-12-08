@@ -27,8 +27,8 @@ module.exports = {
         databaseURL: firebaseConfig.databaseURL,
         types: [
           {
-            type: "Pages",
-            path: "pages",
+            type: "Tracks",
+            path: "tracks",
             map: node => {
               node.content = JSON.stringify(node.content);
 
@@ -36,8 +36,8 @@ module.exports = {
             },
           },
           {
-            type: "Tracks",
-            path: "tracks",
+            type: "Pages",
+            path: "pages",
             map: node => {
               node.content = JSON.stringify(node.content);
 

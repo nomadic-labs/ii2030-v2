@@ -22,7 +22,7 @@ class Navigation extends React.Component {
     return (
       <div className="custom-wrapper" id="menu">
         <Grid container>
-          <Grid xs={12} md={6}>
+          <Grid item xs={12} md={6}>
             <div className="pure-menu">
                 <Link to={'/'} className="pure-menu-heading menu-heading">ii2030</Link>
                 <a href="#" className="custom-toggle" id="toggle"><s className="bar"></s><s className="bar"></s></a>
@@ -53,7 +53,7 @@ class Navigation extends React.Component {
               </ul>
             </div>
           </Grid>
-          <Grid xs={12} md={6}>
+          <Grid item xs={12} md={6}>
             <div className="pure-menu pure-menu-horizontal custom-can-transform pull-right">
               <a href="https://www.linkedin.com/company/endeva/"
               className="pure-menu-heading registration">Read our latest blogposts here!</a>

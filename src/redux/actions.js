@@ -179,54 +179,37 @@ export function submitProjectForm(formData, e) {
   };
 }
 
-// PROJECTS ------------------------
+// TRACKS ------------------------
 
-export function updateProjects(projects) {
-  return { type: "UPDATE_PROJECTS", projects };
+
+export function createTrack(trackData) {
+  return { type: "CREATE_TRACK", trackData }
 }
 
-export function updateProject(projectId, projectData) {
-  return { type: "UPDATE_PROJECT", projectId, projectData };
-}
-
-export function updateProjectStatus(projectId, status) {
+export function updateTrack(trackId, contentId, content) {
   return dispatch => {
     const db = firebase.database();
 
-    db
-      .ref(`projectSubmissions/${projectId}/status`)
-      .set(status)
-      .then(err => {
-        if (err) {
-          return dispatch(
-            showNotification(
-              `There was an error updating this project: ${err}`,
-              "error"
-            )
-          );
-        }
-
-        dispatch(updateProject(projectId, { status }));
-        dispatch(
+    db.ref(`tracks/${trackId}/content/${contentId}/`).update(content, error => {
+      if (error) {
+        return dispatch(
           showNotification(
-            `This project has been marked as ${status}. Don't forget to publish your changes!`,
+            `There was an error saving your changes: ${error}`,
             "success"
           )
         );
-      });
+      }
+
+      dispatch(updatePageData(contentId, content));
+      dispatch(
+        showNotification(
+          "Your changes have been saved. Publish your changes to make them public.",
+          "success"
+        )
+      );
+    });
   };
 }
 
-export function getProjects() {
-  return dispatch => {
-    const db = firebase.database();
 
-    db
-      .ref(`projectSubmissions`)
-      .once("value")
-      .then(snapshot => {
-        const projects = snapshot.val();
-        dispatch(updateProjects(projects));
-      });
-  };
-}
+

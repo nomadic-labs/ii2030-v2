@@ -92,16 +92,17 @@ export const projectForm = (state={}, action) => {
   }
 }
 
-export const projects = (state={}, action) => {
+export const tracks = (state={}, action) => {
   switch (action.type) {
-    case 'UPDATE_PROJECTS':
-      return action.projects;
-    case 'UPDATE_PROJECT':
+    case 'UPDATE_TRACK_DATA':
       return {
         ...state,
-        [action.projectId]: {
-          ...state[action.projectId],
-          ...action.projectData
+        data: {
+          ...state.data,
+          content: {
+            ...state.data.content,
+            [action.contentId]: action.content
+          }
         }
       }
     default:
@@ -116,7 +117,7 @@ export const appReducers = (state = {}, action) => {
     navigation: navigation(state.navigation, action),
     page: page(state.page, action),
     projectForm: projectForm(state.projectForm, action),
-    projects: projects(state.projects, action),
+    tracks: tracks(state.tracks, action),
   }
 }
 
