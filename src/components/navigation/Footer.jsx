@@ -27,24 +27,31 @@ const Footer = props => {
 
               <Grid item xs={12} md={4}>
                 <p>Overview</p>
-                <Link to={"/#overview"}>Event overview</Link>
-                <Link to={"/#timeline"}>Timeline</Link>
-                <Link to={"/#tracks"}>Tracks</Link>
-                <Link to={"/#agenda"}>Program</Link>
-                <Link to={"/#cocreation_process"}>Process</Link>
-                <Link to={"/#partners"}>Partners</Link>
+                <ul>
+                  <li><Link to={"/#overview"}>Event overview</Link></li>
+                  <li><Link to={"/#overview"}>Event overview</Link></li>
+                  <li><Link to={"/#timeline"}>Timeline</Link></li>
+                  <li><Link to={"/#tracks"}>Tracks</Link></li>
+                  <li><Link to={"/#agenda"}>Program</Link></li>
+                  <li><Link to={"/#cocreation_process"}>Process</Link></li>
+                  <li><Link to={"/#partners"}>Partners</Link></li>
+                </ul>
               </Grid>
 
               <Grid item xs={12} md={4}>
                 <p>Tracks</p>
+                <ul>
                 {
-                  tracks.map(track => <Link to={track.node.slug}>{track.node.title}</Link>)
+                  tracks.map(track => <li><Link to={track.node.slug}>{track.node.title}</Link></li>)
                 }
+                </ul>
               </Grid>
 
               <Grid item xs={12} md={4}>
-                <Link to={"/#overview"}>FAQs</Link>
-                <Link to={"/#timeline"}>Impressum</Link>
+                <ul>
+                  <li><Link to={"/#overview"}>FAQs</Link></li>
+                  <li><Link to={"/#timeline"}>Impressum</Link></li>
+                </ul>
               </Grid>
 
             </Grid>
