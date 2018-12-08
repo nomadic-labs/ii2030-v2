@@ -67,7 +67,6 @@ class HomePage extends React.Component {
     const cohosts = []
     const partners = []
     const participants = []
-    console.log("tracks", tracks)
 
     return (
       <Layout>
@@ -121,7 +120,7 @@ class HomePage extends React.Component {
             <TimelineSlider slides={timelineSlides} />
           </Section>
 
-          <Section id="tracks">
+          <Section>
             <header className="text-center">
               <Title level="h2" content={ content["tracks-title"] } onSave={this.onSave('tracks-title')} />
               <div className="headline vert-spacing">
@@ -131,8 +130,8 @@ class HomePage extends React.Component {
               </div>
             </header>
           </Section>
-          <Section className="content background-container">
-            <Grid container className="pure-g tracks">
+          <Section id="tracks" className="content background-container">
+            <Grid container justify="center" className="pure-g tracks">
               {
                 tracks.map((node, i) => {
                   return <TrackCard key={`track-${i}`} track={node} />
@@ -225,7 +224,6 @@ class HomePage extends React.Component {
           </Section>
 
         </main>
-
 
       </Layout>
     );

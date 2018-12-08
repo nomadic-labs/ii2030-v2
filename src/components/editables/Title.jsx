@@ -9,6 +9,7 @@ const variantLookup = {
   h1: 'display1',
   h2: 'display2',
   h3: 'display3',
+  h4: 'display4',
 }
 
 const Title = props => {
@@ -20,7 +21,7 @@ const Title = props => {
   const variant = variantLookup[props.level];
 
   return (
-    <Typography variant={ variant || 'display1' } gutterBottom>
+    <Typography variant={ variant || 'display1' }>
       <Editable
         editor={PlainTextEditor}
         handleSave={handleSave}

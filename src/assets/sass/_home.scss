@@ -450,7 +450,7 @@ section#tracks {
 
       &.active {
         background: $dark-red;
-        color: $white;
+        color: $white !important;
 
         img {
           filter: brightness(100);

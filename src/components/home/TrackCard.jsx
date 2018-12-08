@@ -2,26 +2,32 @@ import React from "react";
 import { Link } from "gatsby";
 import Grid from "@material-ui/core/Grid";
 
-import Image from "../editables/Image";
-import Title from "../editables/Title";
-import Paragraph from "../editables/Paragraph";
 
+class TrackCard extends React.Component {
+  state = {
+    active: false
+  }
 
-const TrackCard = ({ track, onSave }) => {
-  const trackData = track ? track.node : {};
-  console.log("track", track)
-  const content = trackData.content ? JSON.parse(trackData.content) : {};
-  console.log("content", content)
-  return(
-    <Grid item xs={12} sm={6} md={3}>
-      <div className={`track text-center`}>
-        <Image content={ content["icon"] } onSave={ onSave } />
-        <Title level="h3" content={ content["tech"] } onSave={ onSave } />
-        <Paragraph content={ content["topic"] } onSave={ onSave } />
-        <Link to={ trackData["slug"] }><button className="btn white animate hide-unless-active">Learn more</button></Link>
-      </div>
-    </Grid>
-  )
+  toggleActive = () => {
+    this.setState({ active: !this.state.active })
+  }
+
+  render() {
+    const { track, onSave } = this.props;
+    const trackData = track ? track.node : {};
+    const content = trackData.content ? JSON.parse(trackData.content) : {};
+
+    return(
+      <Grid item xs={12} sm={6} md={3} onMouseEnter={this.toggleActive} onMouseLeave={this.toggleActive}>
+        <div className={`track text-center ${this.state.active && 'active'}`}>
+          <img src={ content["icon"]["imageSrc"] } alt="" />
+          <h4>{ content["tech"]["text"] }</h4>
+          <p>{ content["topic"]["text"] }</p>
+          <Link to={ trackData["slug"] }><button className="btn white animate hide-unless-active">Learn more</button></Link>
+        </div>
+      </Grid>
+    )
+  }
 }
 
 export default TrackCard;
