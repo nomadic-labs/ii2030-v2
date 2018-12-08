@@ -61,7 +61,6 @@ class HomePage extends React.Component {
   render() {
     const content = this.props.pageData ? this.props.pageData.content : {};
     const tracks = this.props.data ? this.props.data.allTracks.edges : [];
-    const timelineSlides = content["timeline-slides"] || [];
     const cohosts = []
     const partners = []
     const participants = []

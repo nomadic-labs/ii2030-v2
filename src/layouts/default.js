@@ -25,7 +25,7 @@ const DefaultLayout = props => (
   <div style={styles.container}>
     <Helmet>
       <title>
-        React CMS Starter
+        Inclusive Innovation 2030 | ii2030
       </title>
       <meta
         charSet="utf-8"

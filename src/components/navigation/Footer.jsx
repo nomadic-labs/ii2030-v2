@@ -1,9 +1,13 @@
 import React from "react";
+import { Link, StaticQuery, graphql } from "gatsby";
+import { map } from 'lodash';
 import Grid from "@material-ui/core/Grid";
 import Section from "../../layouts/Section";
 
 const Footer = props => {
+  console.log(props.data)
   const navSections = [];
+  const tracks = props.data.allTracks.edges;
 
   return (
     <footer>
@@ -20,24 +24,29 @@ const Footer = props => {
           <Grid item xs={12} md={6}>
             <p className="column-header">Site map</p>
             <Grid container>
-              {
-                navSections.map((section, i) => {
-                  return (
-                    <Grid item xs={12} md={4} key={`nav-section-${i}`}>
-                      { section.navs && section.navs.map((nav, i) => {
-                        return (
-                          <div key={`section-nav-${i}`}>
-                            <p className="site-map-item">{ nav.name }</p>
-                            { nav.subs && nav.subs.map((subnav, i) => (
-                              <a data-scroll href={subnav.link} className="">{ subnav.name }</a>
-                            ))}
-                          </div>
-                        )
-                      })}
-                    </Grid>
-                  )
-                })
-              }
+
+              <Grid item xs={12} md={4}>
+                <p>Overview</p>
+                <Link to={"/#overview"}>Event overview</Link>
+                <Link to={"/#timeline"}>Timeline</Link>
+                <Link to={"/#tracks"}>Tracks</Link>
+                <Link to={"/#agenda"}>Program</Link>
+                <Link to={"/#cocreation_process"}>Process</Link>
+                <Link to={"/#partners"}>Partners</Link>
+              </Grid>
+
+              <Grid item xs={12} md={4}>
+                <p>Tracks</p>
+                {
+                  tracks.map(track => <Link to={track.node.slug}>{track.node.title}</Link>)
+                }
+              </Grid>
+
+              <Grid item xs={12} md={4}>
+                <Link to={"/#overview"}>FAQs</Link>
+                <Link to={"/#timeline"}>Impressum</Link>
+              </Grid>
+
             </Grid>
           </Grid>
         </Grid>
@@ -46,4 +55,33 @@ const Footer = props => {
   );
 };
 
-export default Footer;
+export default () => (
+  <StaticQuery
+    query={graphql`
+      query {
+        allPages {
+          edges {
+            node {
+              id
+              title
+              slug
+            }
+          }
+        }
+        allTracks {
+          edges {
+            node {
+              id
+              title
+              slug
+            }
+          }
+        }
+      }
+    `}
+    render={data => (
+      <Footer data={data} />
+    )}
+  />
+)
+
