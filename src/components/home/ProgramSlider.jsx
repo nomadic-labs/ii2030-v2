@@ -2,13 +2,15 @@ import React from 'react';
 import Slider from 'react-slick'
 import Grid from "@material-ui/core/Grid"
 
+import Title from "../editables/Title";
+import Paragraph from "../editables/Paragraph";
+import PlainText from "../editables/PlainText";
+
 import headIcon from "../../assets/images/head-icon-standardized.png"
 import tourIcon from "../../assets/images/tour-icon-standardized.png"
 import tourIconLabelled from "../../assets/images/tour-icon-standardized-labelled.png"
 import factoryIcon from "../../assets/images/factory-icon-standardized.png"
 import factoryIconLabelled from "../../assets/images/factory-icon-standardized-labelled.png"
-
-
 
 export default class ProgramSlider extends React.Component {
   state = {
@@ -21,6 +23,12 @@ export default class ProgramSlider extends React.Component {
   }
 
   render() {
+    const sliderSettings = {
+      arrows: false,
+      infinite: false,
+      draggable: false,
+    }
+
     return(
       <div>
         <div className="day-selector">
@@ -28,7 +36,7 @@ export default class ProgramSlider extends React.Component {
           <button data-day="day-2" className={`btn btn-day2 white day-2 ${(this.state.slideIndex === 1) && 'active'}`} onClick={() => this.goToSlide(1)}>Day 2: Factory</button>
         </div>
 
-        <Slider arrows={false} infinite={false} ref={slider => (this.slider = slider)}>
+        <Slider { ...sliderSettings } ref={slider => (this.slider = slider)}>
 
           <div className="tour-agenda">
             <Grid container>
@@ -43,9 +51,13 @@ export default class ProgramSlider extends React.Component {
                 <div className="text vert-spacing horiz-spacing">
                   <div className="text">
                     <div className="vert-spacing">
-                      <h3 className="agenda-title">Inclusive Innovation Tour</h3>
-                      <small className="agenda-date bold">Date - location</small>
-                      <p className="agenda-description vert-spacing">Several tour guides take participants on an exploration of Berlin’s buzzing inclusive innovation scene to provide inspiration and information around the ii2030 challenges.</p>
+                      <Title level="h3" content={ this.props.content["agenda-tour-title"] } onSave={this.props.saveHandler("agenda-tour-title")} />
+                      <small className="agenda-date bold">
+                        <PlainText content={ this.props.content["agenda-tour-dates"] } onSave={this.props.saveHandler("agenda-tour-dates")} />
+                      </small>
+                      <div className="vert-spacing">
+                        <Paragraph content={ this.props.content["agenda-tour-description"] } onSave={this.props.saveHandler("agenda-tour-description")} />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -66,9 +78,13 @@ export default class ProgramSlider extends React.Component {
                 <div className="text vert-spacing horiz-spacing">
                   <div className="text">
                     <div className="vert-spacing">
-                      <h3 className="agenda-title">Inclusive Innovation Factory</h3>
-                      <small className="agenda-date bold">Date - location</small>
-                      <p className="agenda-description vert-spacing">In design-thinking workshops of up to 10 participants, we work out how technology can drive inclusive innovation, and what is needed to realize solutions. Participants are carefully selected to bring together those actors who can make the change - and only those.</p>
+                      <Title level="h3" content={ this.props.content["agenda-factory-title"] } onSave={this.props.saveHandler("agenda-factory-title")} />
+                      <small className="agenda-date bold">
+                        <PlainText content={ this.props.content["agenda-factory-dates"] } onSave={this.props.saveHandler("agenda-factory-dates")} />
+                      </small>
+                      <div className="vert-spacing">
+                        <Paragraph content={ this.props.content["agenda-factory-description"] }  onSave={this.props.saveHandler("agenda-factory-description")} />
+                      </div>
                     </div>
                   </div>
                 </div>

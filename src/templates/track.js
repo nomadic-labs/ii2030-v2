@@ -171,7 +171,7 @@ class TrackTemplate extends React.Component {
 
               <Grid item xs={12}>
                 <div id="factory">
-                  <section class="intro">
+                  <section className="intro">
                     <header className="text-center">
                       <Title level="h2" content={ content["factory-title"] } onSave={this.onSave('factory-title')} />
                       <div className="headline vert-spacing">
@@ -179,7 +179,7 @@ class TrackTemplate extends React.Component {
                       </div>
                     </header>
 
-                    <div class="outer-container">
+                    <div className="outer-container">
                       <Grid container>
                         <Grid item xs={12} md={6}>
                           <div className="vert-center horiz-center">
@@ -203,7 +203,7 @@ class TrackTemplate extends React.Component {
                     <header className="text-center">
                       <Title level="h2" content={ content["factory-outputs-title"] } onSave={this.onSave('factory-outputs-title')} />
                     </header>
-                    <div class="text horiz-spacing">
+                    <div className="text horiz-spacing">
                       <Paragraph content={ content["factory-outputs-description"] } onSave={this.onSave('factory-outputs-description')} />
                     </div>
                   </section>

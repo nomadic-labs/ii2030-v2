@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from 'react-slick'
 import Grid from "@material-ui/core/Grid"
+import { map } from 'lodash';
 
 import Image from "../editables/Image";
 import Title from "../editables/Title";
@@ -16,6 +17,7 @@ export default class TimelineSlider extends React.Component {
     this.setState({ slideIndex })
   }
 
+
   render() {
     const settings = {
       dots: true,
@@ -24,11 +26,19 @@ export default class TimelineSlider extends React.Component {
       swipe: true,
     }
 
+    const onSavePassthrough = (index, fieldId) => content => {
+      const newSlides = [...this.props.slides]
+      newSlides[index][fieldId] = content
+      this.props.onSave(newSlides)
+    }
+
+    const slides = this.props.slides || [];
+
     return(
       <div className="tour-stops-container">
         <Slider {...settings} infinite={false} ref={slider => (this.slider = slider)}>
           {
-            this.props.slides.map((slide, i) => {
+            map(slides, (slide, i) => {
               return(
                 <div className="slide" key={`timeline-slide-${i}`}>
                   <Grid container justify="center">
@@ -36,11 +46,11 @@ export default class TimelineSlider extends React.Component {
                       <div className="content-container">
                         { slide["image"] &&
                           <div className="image">
-                            <Image content={ slide["image"] } onSave={ this.props.onSave } />
+                            <Image content={ slide["image"] } onSave={ onSavePassthrough(i, "image") } />
                           </div>
                         }
-                        <Title content={ slide["heading"] } onSave={ this.props.onSave } />
-                        <Paragraph content={ slide["description"] } onSave={ this.props.onSave } />
+                        <Title content={ slide["heading"] } onSave={ onSavePassthrough(i, "heading") } />
+                        <Paragraph content={ slide["description"] } onSave={ onSavePassthrough(i, "description") } />
                       </div>
                     </Grid>
                   </Grid>

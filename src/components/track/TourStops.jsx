@@ -16,8 +16,7 @@ export default class TourStops extends React.Component {
       dots: true,
       infinite: true,
       arrows: false,
-      swipe: true,
-
+      swipe: true
     }
 
     return(

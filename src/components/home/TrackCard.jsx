@@ -13,7 +13,7 @@ class TrackCard extends React.Component {
   }
 
   render() {
-    const { track, onSave } = this.props;
+    const { track } = this.props;
     const trackData = track ? track.node : {};
     const content = trackData.content ? JSON.parse(trackData.content) : {};
 
