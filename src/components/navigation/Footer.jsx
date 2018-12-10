@@ -71,7 +71,7 @@ export default () => (
             }
           }
         }
-        allTracks {
+        allTracks(filter: { year: { eq: 2017 } }) {
           edges {
             node {
               id

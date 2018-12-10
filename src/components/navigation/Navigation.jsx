@@ -1,39 +1,148 @@
 import React from "react";
 import { StaticQuery, graphql } from "gatsby"
 import { Link } from "gatsby";
+
 import Grid from "@material-ui/core/Grid"
+import ToolBar from "@material-ui/core/ToolBar"
+import Button from "@material-ui/core/Button"
+import AppBar from "@material-ui/core/AppBar"
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
+const styles = {
+  menuItem: {
+    fontWeight: 100,
+    fontSize: '16px',
+  }
+}
+
+class TracksDropdown extends React.Component {
+  state = {
+    anchorEl: null
+  }
+
+  handleMenu = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  render() {
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
+    return(
+      <div>
+        <Button
+          aria-owns={open ? 'menu-appbar' : undefined}
+          aria-haspopup="true"
+          onClick={this.handleMenu}
+          color="inherit"
+        >
+          <>
+            { this.props.anchorText }
+            <ExpandMoreIcon />
+          </>
+        </Button>
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={open}
+          onClose={this.handleClose}
+        >
+          {
+            this.props.tracks.map(track => <MenuItem onClick={this.handleClose} key={track.node.slug} component={Link} to={track.node.slug} style={styles.menuItem}>{track.node.tech}</MenuItem>)
+          }
+        </Menu>
+      </div>
+    )
+  }
+}
+
+class OverviewDropdown extends React.Component {
+  state = {
+    anchorEl: null
+  }
+
+  handleMenu = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  render() {
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
+    return(
+      <div>
+        <Button
+          aria-owns={open ? 'menu-appbar' : undefined}
+          aria-haspopup="true"
+          onClick={this.handleMenu}
+          color="inherit"
+        >
+          <>
+            Overview
+            <ExpandMoreIcon />
+          </>
+        </Button>
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={open}
+          onClose={this.handleClose}
+        >
+          <MenuItem onClick={this.handleClose} style={styles.menuItem} component={Link} to={"/#overview"}>Event overview</MenuItem>
+          <MenuItem onClick={this.handleClose} style={styles.menuItem} component={Link} to={"/#timeline"}>Timeline</MenuItem>
+          <MenuItem onClick={this.handleClose} style={styles.menuItem} component={Link} to={"/#tracks"}>Tracks</MenuItem>
+          <MenuItem onClick={this.handleClose} style={styles.menuItem} component={Link} to={"/#agenda"}>Program</MenuItem>
+          <MenuItem onClick={this.handleClose} style={styles.menuItem} component={Link} to={"/#cocreation_process"}>Process</MenuItem>
+          <MenuItem onClick={this.handleClose} style={styles.menuItem} component={Link} to={"/#partners"}>Partners</MenuItem>
+        </Menu>
+      </div>
+    )
+  }
+}
+
 
 
 class Navigation extends React.Component {
-  static = {
-    open: false
-  }
 
   render() {
-    // console.log(this.props.data)
+    const tracks = this.props.data.allTracks.edges
+    const tracks2017 = tracks.filter(track => track.node.year === 2017)
+    const tracks2019 = tracks.filter(track => track.node.year === 2019)
 
     return (
-      <div className="custom-wrapper" id="menu">
-        <Grid container>
-          <Grid item xs={12} md={6}>
-            <div className="pure-menu">
-                <Link to={'/'} className="pure-menu-heading menu-heading">ii2030</Link>
-                <a href="/#/" className="custom-toggle" id="toggle"><s className="bar"></s><s className="bar"></s></a>
-            </div>
-            <div className="pure-menu pure-menu-horizontal custom-can-transform">
-              <ul className="pure-menu-list">
-
-              </ul>
-            </div>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <div className="pure-menu pure-menu-horizontal custom-can-transform pull-right">
-              <a href="https://www.linkedin.com/company/endeva/"
-              className="pure-menu-heading registration">Read our latest blogposts here!</a>
-            </div>
-          </Grid>
-        </Grid>
-      </div>
+      <AppBar position="fixed" color="default" id="menu">
+        <ToolBar>
+          <Button to={'/'} component={Link} color="secondary" className="menu-heading">ii2030</Button>
+          <OverviewDropdown />
+          <TracksDropdown anchorText={"Past tracks"} tracks={tracks2017} />
+          <TracksDropdown anchorText={"2019 Tracks"} tracks={tracks2019} />
+          <Button to={'/faqs'} component={Link}>FAQs</Button>
+        </ToolBar>
+      </AppBar>
     );
   }
 }
@@ -57,6 +166,8 @@ export default () => (
               id
               title
               slug
+              tech
+              year
             }
           }
         }

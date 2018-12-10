@@ -1,3 +1,12 @@
+#menu {
+  button, a {
+    font-weight: 100;
+
+    &.menu-heading {
+      font-weight: 400;
+    }
+  }
+}
 
 .custom-wrapper {
   -webkit-font-smoothing: antialiased;

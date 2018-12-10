@@ -16,7 +16,6 @@ class TrackCard extends React.Component {
     const { track } = this.props;
     const trackData = track ? track.node : {};
     const content = trackData.content ? JSON.parse(trackData.content) : {};
-    console.log(trackData)
 
     return(
       <Grid item xs={12} sm={6} md={3} onMouseEnter={this.toggleActive} onMouseLeave={this.toggleActive}>
