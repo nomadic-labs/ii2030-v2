@@ -7,6 +7,7 @@ import {
 } from "../redux/actions";
 
 import Grid from "@material-ui/core/Grid"
+import Button from "@material-ui/core/Button"
 
 import Layout from "../layouts/default.js";
 import Section from "../layouts/Section";
@@ -26,6 +27,7 @@ import endevaLogo from "../assets/images/logos/endeva.png"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+const PAGE_ID = "home"
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -40,7 +42,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    pageData: state.page.data
+    pageData: state.page.data,
+    isEditingPage: state.adminTools.isEditingPage,
   };
 };
 
@@ -55,14 +58,118 @@ class HomePage extends React.Component {
   }
 
   saveHandler = id => content => {
-    this.props.onUpdatePageData("home", id, content);
+    this.props.onUpdatePageData(PAGE_ID, id, content);
   };
+
+  addPartner = () => {
+    const partnerArray = [...this.props.pageData.content.partners]
+    const newPartner = {
+      "logo" : {
+        "imageSrc" : "/icon.png"
+      },
+      "name" : {
+        "text" : "Placeholder"
+      }
+    }
+
+    partnerArray.push(newPartner)
+    this.props.onUpdatePageData(PAGE_ID, "partners", partnerArray)
+  };
+
+  editPartner = (index, field) => content => {
+    const arr = [...this.props.pageData.content.partners];
+    const updated = {
+      ...arr[index],
+      [field]: content
+    };
+
+    arr[index] = updated;
+
+    this.props.onUpdatePageData(PAGE_ID, "partners", arr);
+  };
+
+  deletePartner = i => () => {
+    const arr = [...this.props.pageData.content.partners]
+    arr.splice(i, 1)
+    this.props.onUpdatePageData(PAGE_ID, "partners", arr)
+  };
+
+  addCohost = () => {
+    const arr = [...this.props.pageData.content.cohosts]
+    const updated = {
+      "logo" : {
+        "imageSrc" : "/icon.png"
+      },
+      "name" : {
+        "text" : "Placeholder"
+      }
+    }
+
+    arr.push(updated)
+    this.props.onUpdatePageData(PAGE_ID, "cohosts", arr)
+  };
+
+  editCohost = (index, field) => content => {
+    const arr = [...this.props.pageData.content.cohosts];
+    const updated = {
+      ...arr[index],
+      [field]: content
+    };
+
+    arr[index] = updated;
+
+    this.props.onUpdatePageData(PAGE_ID, "cohosts", arr);
+  };
+
+  deleteCohost = i => () => {
+    const arr = [...this.props.pageData.content.cohosts]
+    arr.splice(i, 1)
+    this.props.onUpdatePageData(PAGE_ID, "cohosts", arr)
+  };
+
+  addParticipant = () => {
+    const arr = [...this.props.pageData.content.participants]
+    const newParticipant = {
+      "logo" : {
+        "imageSrc" : "/icon.png"
+      },
+      "name" : {
+        "text" : "Placeholder"
+      },
+      "link" : {
+        "text" : "http://endeva.org/"
+      }
+    }
+
+    arr.push(newParticipant)
+    this.props.onUpdatePageData(PAGE_ID, "participants", arr)
+  };
+
+  editParticipant = (index, field) => content => {
+    const arr = [...this.props.pageData.content.participants];
+    const updated = {
+      ...arr[index],
+      [field]: content
+    };
+
+    arr[index] = updated;
+
+    this.props.onUpdatePageData(PAGE_ID, "participants", arr);
+  };
+
+  deleteParticipant = i => () => {
+    const arr = [...this.props.pageData.content.participants]
+    arr.splice(i, 1)
+    this.props.onUpdatePageData(PAGE_ID, "participants", arr)
+  }
+
 
   render() {
     const content = this.props.pageData ? this.props.pageData.content : {};
     const tracks = this.props.data ? this.props.data.allTracks.edges : [];
-    const partners = this.props.data ? this.props.data.allPartners.edges : [];
-    const participants = this.props.data ? this.props.data.allParticipants.edges : [];
+    const cohosts = content["cohosts"] || [];
+    const partners = content["partners"] || [];
+    const participants = content["participants"] || [];
 
     return (
       <Layout>
@@ -192,34 +299,18 @@ class HomePage extends React.Component {
                 <h3>Co-hosted by </h3>
               </div>
               <div className="logos">
-                {
-                  partners.map((partner, i) => {
-                    const company = partner.node;
-                    const content = JSON.parse(company.content)
-
-                    if (company["partnership_level"] === "cohost") {
-                      return <LogoDisplay key={`partner-${i}`} logo={content} />
-                    }
-
-                    return null;
-                  })
-                }
+                { cohosts.map((entity, i) => <LogoDisplay key={`cohost-${i}`} index={i} entity={entity} onDelete={this.props.isEditingPage ? this.deleteCohost : null} onSave={this.editCohost} />) }
+                { this.props.isEditingPage && <Button onClick={this.addCohost}>Add cohost</Button> }
               </div>
             </div>
-            <div className="partner-group headline">
-              <h3>Partners</h3>
-              {
-                partners.map((partner, i) => {
-                  const company = partner.node;
-                  const content = JSON.parse(company.content)
-
-                  if (company["partnership_level"] === "partner") {
-                    return <LogoDisplay key={`partner-${i}`} logo={content} />
-                  }
-
-                  return null;
-                })
-              }
+            <div className="partner-group">
+              <div className="headline">
+                <h3>Partners</h3>
+              </div>
+              <div className="logos">
+                { partners.map((entity, i) => <LogoDisplay key={`partner-${i}`} index={i} entity={entity} onDelete={this.props.isEditingPage ? this.deletePartner : null} onSave={this.editPartner} />) }
+                { this.props.isEditingPage && <Button onClick={this.addPartner}>Add partner</Button> }
+              </div>
             </div>
           </Section>
 
@@ -228,7 +319,8 @@ class HomePage extends React.Component {
             <header className="text-center">
               <Title level="h2" content={ content["participants-title"] } onSave={this.saveHandler('participants-title')} />
             </header>
-            <Participants participants={participants} />
+            <Participants participants={participants} isEditingPage={this.props.isEditingPage} onSave={this.editParticipant} onDelete={this.deleteParticipant}/>
+            { this.props.isEditingPage && <Button onClick={this.addParticipant}>Add participant</Button> }
           </Section>
 
         </main>
@@ -254,6 +346,7 @@ export const query = graphql`
           id
           title
           slug
+          tech
           content
         }
       }

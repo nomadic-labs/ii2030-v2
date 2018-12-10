@@ -71,6 +71,7 @@ class CreateTrackModal extends React.Component {
       title: this.state.page.title,
       tech: this.state.page.tech,
       slug: `/tracks/${slugifiedTitle}`,
+      year: this.state.page.year,
       page_type: "track",
       template: "track.js",
       navigation: {
