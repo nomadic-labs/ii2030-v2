@@ -1,12 +1,9 @@
 import React from "react";
 import { Link, StaticQuery, graphql } from "gatsby";
-import { map } from 'lodash';
 import Grid from "@material-ui/core/Grid";
 import Section from "../../layouts/Section";
 
 const Footer = props => {
-  console.log(props.data)
-  const navSections = [];
   const tracks = props.data.allTracks.edges;
 
   return (
@@ -29,7 +26,6 @@ const Footer = props => {
                 <p>Overview</p>
                 <ul>
                   <li><Link to={"/#overview"}>Event overview</Link></li>
-                  <li><Link to={"/#overview"}>Event overview</Link></li>
                   <li><Link to={"/#timeline"}>Timeline</Link></li>
                   <li><Link to={"/#tracks"}>Tracks</Link></li>
                   <li><Link to={"/#agenda"}>Program</Link></li>
@@ -42,15 +38,15 @@ const Footer = props => {
                 <p>Tracks</p>
                 <ul>
                 {
-                  tracks.map(track => <li><Link to={track.node.slug}>{track.node.title}</Link></li>)
+                  tracks.map(track => <li key={track.node.slug}><Link to={track.node.slug}>{track.node.tech}</Link></li>)
                 }
                 </ul>
               </Grid>
 
               <Grid item xs={12} md={4}>
                 <ul>
-                  <li><Link to={"/#overview"}>FAQs</Link></li>
-                  <li><Link to={"/#timeline"}>Impressum</Link></li>
+                  <li><Link to={"/faqs"}>FAQs</Link></li>
+                  <li><Link to={"/impressum"}>Impressum</Link></li>
                 </ul>
               </Grid>
 
@@ -81,6 +77,11 @@ export default () => (
               id
               title
               slug
+              tech
+              navigation {
+                order
+                displayTitle
+              }
             }
           }
         }

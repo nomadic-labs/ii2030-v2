@@ -18,7 +18,7 @@ import OverviewSlides from "../components/home/OverviewSlides"
 import TimelineSlider from "../components/home/TimelineSlider"
 import TrackCard from "../components/home/TrackCard"
 import LogoDisplay from "../components/home/LogoDisplay"
-import Participant from "../components/home/Participant"
+import Participants from "../components/home/Participants"
 import ProgramSlider from "../components/home/ProgramSlider"
 
 import endevaLogo from "../assets/images/logos/endeva.png"
@@ -61,9 +61,8 @@ class HomePage extends React.Component {
   render() {
     const content = this.props.pageData ? this.props.pageData.content : {};
     const tracks = this.props.data ? this.props.data.allTracks.edges : [];
-    const cohosts = []
-    const partners = []
-    const participants = []
+    const partners = this.props.data ? this.props.data.allPartners.edges : [];
+    const participants = this.props.data ? this.props.data.allParticipants.edges : [];
 
     return (
       <Layout>
@@ -144,31 +143,37 @@ class HomePage extends React.Component {
             </header>
             <Grid container spacing={24} className="tour-stops">
               <Grid item xs={12} md={4}>
-                <div className="content-container centered">
+                <div className="content-container">
                     <div className="image">
                       <img src="/images/chat.png" alt="" className="pure-img" />
                     </div>
-                    <Title level="h3" content={ content["process-step1-title"] } onSave={this.saveHandler('process-step1-title')} />
+                    <div className="text-center">
+                      <Title level="h3" content={ content["process-step1-title"] } onSave={this.saveHandler('process-step1-title')} />
+                    </div>
                     <Paragraph content={ content["process-step1-description"] } onSave={this.saveHandler('process-step1-description')} />
                 </div>
               </Grid>
 
               <Grid item xs={12} md={4}>
-                <div className="content-container centered">
+                <div className="content-container">
                     <div className="image">
                       <img src="/images/group.png" alt="" className="pure-img" />
                     </div>
-                    <Title level="h3" content={ content["process-step2-title"] } onSave={this.saveHandler('process-step2-title')} />
+                    <div className="text-center">
+                      <Title level="h3" content={ content["process-step2-title"] } onSave={this.saveHandler('process-step2-title')} />
+                    </div>
                     <Paragraph content={ content["process-step2-description"] } onSave={this.saveHandler('process-step2-description')} />
                 </div>
               </Grid>
 
               <Grid item xs={12} md={4}>
-                <div className="content-container centered">
+                <div className="content-container">
                     <div className="image">
                       <img src="/images/rocket.png" alt="" className="pure-img" />
                     </div>
-                    <Title level="h3" content={ content["process-step3-title"] } onSave={this.saveHandler('process-step3-title')} />
+                    <div className="text-center">
+                      <Title level="h3" content={ content["process-step3-title"] } onSave={this.saveHandler('process-step3-title')} />
+                    </div>
                     <Paragraph content={ content["process-step3-description"] } onSave={this.saveHandler('process-step3-description')} />
                 </div>
               </Grid>
@@ -182,19 +187,37 @@ class HomePage extends React.Component {
             <div className="host partner-group headline">
               <h3>An <a href="http://www.endeva.org/" target="_blank" rel="noopener noreferrer"><img id="endeva-logo" src={endevaLogo} alt="Endeva logo" /></a> initiative</h3>
             </div>
-            <div className="partner-group headline">
-              <h3>Co-hosted by </h3>
-              {
-                cohosts.map((host, i) => {
-                  return <LogoDisplay key={`host-${i}`} logo={host} />
-                })
-              }
+            <div className="partner-group">
+              <div className="headline">
+                <h3>Co-hosted by </h3>
+              </div>
+              <div className="logos">
+                {
+                  partners.map((partner, i) => {
+                    const company = partner.node;
+                    const content = JSON.parse(company.content)
+
+                    if (company["partnership_level"] === "cohost") {
+                      return <LogoDisplay key={`partner-${i}`} logo={content} />
+                    }
+
+                    return null;
+                  })
+                }
+              </div>
             </div>
             <div className="partner-group headline">
               <h3>Partners</h3>
               {
                 partners.map((partner, i) => {
-                  return <LogoDisplay key={`partner-${i}`} logo={partner} />
+                  const company = partner.node;
+                  const content = JSON.parse(company.content)
+
+                  if (company["partnership_level"] === "partner") {
+                    return <LogoDisplay key={`partner-${i}`} logo={content} />
+                  }
+
+                  return null;
                 })
               }
             </div>
@@ -205,13 +228,7 @@ class HomePage extends React.Component {
             <header className="text-center">
               <Title level="h2" content={ content["participants-title"] } onSave={this.saveHandler('participants-title')} />
             </header>
-            <div className="participants-slider slide-container">
-              {
-                participants.map((participant, i) => {
-                  return <Participant key={`participant-${i}`} participant={participant} />
-                })
-              }
-            </div>
+            <Participants participants={participants} />
           </Section>
 
         </main>
@@ -237,6 +254,23 @@ export const query = graphql`
           id
           title
           slug
+          content
+        }
+      }
+    }
+    allPartners {
+      edges {
+        node {
+          id
+          partnership_level
+          content
+        }
+      }
+    }
+    allParticipants {
+      edges {
+        node {
+          id
           content
         }
       }

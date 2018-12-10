@@ -1,10 +1,14 @@
 import React from 'react';
 import Slider from 'react-slick'
+import Title from "../../components/editables/Title";
+import Paragraph from "../../components/editables/Paragraph";
 
 export default class IntroSlides extends React.Component {
   state = {
     slideIndex: 0
   }
+
+  questions = [ 'what', 'why', 'who', 'how' ]
 
   goToSlide = slideIndex => {
     this.slider.slickGoTo(slideIndex)
@@ -23,14 +27,17 @@ export default class IntroSlides extends React.Component {
       <div className="intro-slides-container">
         <Slider {...sliderSettings} infinite={false} ref={slider => (this.slider = slider)}>
           {
-            this.props.slides.map((slide, i) => {
+            this.questions.map((question) => {
+              const slide = this.props.slides[question];
+              if (!slide) return null;
+
               return(
-                <div className="slide" key={`intro-slide-${i}`}>
+                <div className="slide" key={`intro-slide-${question}`}>
                   <div className="text horiz-spacing">
                     <div className="headline vert-spacing">
-                      <h2>{ slide.question }</h2>
+                      <Title level="h2" content={slide["question"]} />
                     </div>
-                    <p>{ slide.answer }</p>
+                    <Paragraph content={slide["answer"]} />
                   </div>
                 </div>
               )

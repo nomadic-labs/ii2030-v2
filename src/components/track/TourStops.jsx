@@ -1,6 +1,10 @@
 import React from 'react';
 import Slider from 'react-slick'
 
+import Title from "../../components/editables/Title";
+import Paragraph from "../../components/editables/Paragraph";
+import Image from "../../components/editables/Image";
+
 export default class TourStops extends React.Component {
   state = {
     slideIndex: 0
@@ -12,7 +16,7 @@ export default class TourStops extends React.Component {
   }
 
   render() {
-    const tourStopsSettings = {
+    const sliderSettings = {
       dots: true,
       infinite: true,
       arrows: false,
@@ -21,20 +25,21 @@ export default class TourStops extends React.Component {
 
     return(
       <div className="tour-stops-container">
-        <Slider {...tourStopsSettings} infinite={false} ref={slider => (this.slider = slider)}>
+        <Slider {...sliderSettings} infinite={false} ref={slider => (this.slider = slider)}>
           {
-            this.props.stops.map((stop, i) => {
+            this.props.slides.map((slide, i) => {
               return(
                 <div className="slide" key={`tour-stop-${i}`}>
                   <div className="content-container pure-g centered">
                     <div className="pure-u-1">
 
                       <div className="image">
-                        <img src={ stop.imageSrc } alt={ stop.organization } className="pure-img" />
+                        <Image content={ slide["image"] } />
                       </div>
 
-                      <h3>{ stop.organization }</h3>
-                      <p>{ stop.description }</p>
+                      <Title level="h3" content={ slide["organization"] } />
+                      <Paragraph content={ slide["description"] } />
+
                     </div>
                   </div>
                 </div>

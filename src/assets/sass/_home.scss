@@ -194,35 +194,6 @@ section#timeline {
   }
 }
 
-section#partners {
-  .partner-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-end;
-    margin-bottom: 60px;
-
-    h3 {
-      margin: 0;
-    }
-
-    img {
-      max-height: 2.8em;
-      margin-top: 20px;
-      margin-left: 20px;
-      margin-right: 20px;
-
-      &:not(#endeva-logo) {
-        margin-left: 40px;
-      }
-
-      &#endeva-logo {
-        max-height: 4em;
-      }
-    }
-  }
-}
-
 section#agenda {
 
   .oversize.image {
@@ -598,18 +569,21 @@ section#cocreation_process {
 
 section#partners {
   .partner-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-end;
     margin-bottom: 60px;
+
+    .logos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-end;
+    }
 
     h3 {
       margin: 0;
     }
 
     img {
-      max-height: 2.8em;
+      max-width: 120px;
       margin-top: 20px;
       margin-left: 20px;
       margin-right: 20px;
@@ -619,7 +593,7 @@ section#partners {
       }
 
       &#endeva-logo {
-        max-height: 4em;
+        max-width: 200px;
       }
     }
   }
@@ -628,7 +602,6 @@ section#partners {
 section#participants {
   padding-bottom: $xl-spacing;
 
-  .participants-slider {
     .slide {
       display: flex;
       justify-content: center;
@@ -636,11 +609,10 @@ section#participants {
 
       img {
         filter: grayscale(1);
-        width: 80px;
+        max-width: 80px;
         margin: $sm-spacing;
       }
     }
-  }
 }
 
 .background-container-sm {
@@ -649,4 +621,8 @@ section#participants {
   height: 80%;
   position: absolute;
   z-index: -1;
+}
+
+.hidden {
+  display: none;
 }

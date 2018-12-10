@@ -1,0 +1,103 @@
+{
+    "factory-description" : {
+      "text" : "<p>In a design-thinking workshop of up to 10 participants, we will work out how technology can drive inclusive innovation, and what is needed to achieve a solution. Participants are carefully selected to bring together those actors who can make the change.</p>\n<p>Design-thinking methodology is a collaborative solution-based approach to solving complex challenges. The strategic process will guide the team of like-minded partners in co-creating concrete, innovative and user-friendly solutions in a 1-day, action-packed workshop.</p>"
+    },
+    "factory-outputs-description" : {
+      "text" : "Placeholder"
+    },
+    "factory-outputs-title" : {
+      "text" : "Factory Outputs"
+    },
+    "factory-subtitle" : {
+      "text" : "<p>The Factory is all about manufacturing solutions through cross-sector collaboration!</p>"
+    },
+    "factory-title" : {
+      "text" : "Day 2: Inclusive Innovation Factory"
+    },
+    "icon" : {
+      "imageSrc" : "/icons/agri-red.svg"
+    },
+    "intro-slides" : {
+      "how" : {
+        "answer" : {
+          "text" : "Placeholder"
+        },
+        "question" : {
+          "text" : "Placeholder"
+        }
+      },
+      "what" : {
+        "answer" : {
+          "text" : "Placeholder"
+        },
+        "question" : {
+          "text" : "Placeholder"
+        }
+      },
+      "who" : {
+        "answer" : {
+          "text" : "Placeholder"
+        },
+        "question" : {
+          "text" : "Placeholder"
+        }
+      },
+      "why" : {
+        "answer" : {
+          "text" : "Placeholder"
+        },
+        "question" : {
+          "text" : "Placeholder"
+        }
+      }
+    },
+    "topic" : {
+      "text" : "Track topic"
+    },
+    "tour-description" : {
+      "text" : "<p>Our tour guides take participants on an exploration of Berlin’s buzzing inclusive innovation scene to provide inspiration and information for each track.</p>\n<p>The 4-hour tour takes participants to 3 visionary organizations, where hosts will lead a discussion on how greater inclusion in their sector will impact society in 2030.</p>\n<p>The day will end with a “Meet &amp; Greet” networking dinner. Participants from all tracks reconvene over dinner to share what they have learned and get to know one another.</p>"
+    },
+    "tour-stops" : [ {
+      "description" : {
+        "text" : "Description"
+      },
+      "image" : {
+        "imageSrc" : "/images/test1.png"
+      },
+      "organization" : {
+        "text" : "Organization"
+      }
+    }, {
+      "description" : {
+        "text" : "Description"
+      },
+      "image" : {
+        "imageSrc" : "/images/test2.png"
+      },
+      "organization" : {
+        "text" : "Organization"
+      }
+    }, {
+      "description" : {
+        "text" : "Description"
+      },
+      "image" : {
+        "imageSrc" : "\"/images/test3.png"
+      },
+      "organization" : {
+        "text" : "Organization"
+      }
+    } ],
+    "tour-stops-subtitle" : {
+      "text" : "<p>This track takes participants on a tour of the following organizations:</p>"
+    },
+    "tour-stops-title" : {
+      "text" : "Tour Stops"
+    },
+    "tour-subtitle" : {
+      "text" : "<p>Hit the road on our inclusive innovation tour of Berlin!</p>"
+    },
+    "tour-title" : {
+      "text" : "Day 1: Inclusive Innovation Tour"
+    }
+}

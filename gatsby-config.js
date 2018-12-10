@@ -44,6 +44,24 @@ module.exports = {
               return node
             },
           },
+          {
+            type: "Partners",
+            path: "partners",
+            map: node => {
+              node.content = JSON.stringify(node.content);
+
+              return node
+            },
+          },
+          {
+            type: "Participants",
+            path: "participants",
+            map: node => {
+              node.content = JSON.stringify(node.content);
+
+              return node
+            },
+          },
         ]
       }
     },

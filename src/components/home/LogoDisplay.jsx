@@ -1,9 +1,14 @@
 import React from "react";
+import Image from "../../components/editables/Image";
+import PlainText from "../../components/editables/PlainText";
 
 
-const LogoDisplay = ({ logo }) => {
+const LogoDisplay = ({ logo, onSave }) => {
   return(
-   <img src={ logo.imageSrc } alt={ logo.name } />
+    <div>
+      <Image content={ logo.logo } />
+      <PlainText content={ logo.name } className="hidden" />
+    </div>
   )
 }
 

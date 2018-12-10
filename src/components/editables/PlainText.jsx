@@ -5,7 +5,7 @@ import Editable from "./Editable";
 import PlainTextEditor from "../editingTools/PlainTextEditor";
 
 
-const PlainText = props => {
+const PlainText = ({ className, ...props }) => {
   const handleSave = newContent => {
     props.onSave(newContent);
   };
@@ -19,7 +19,7 @@ const PlainText = props => {
       content={{ text: text }}
       {...props}
     >
-      { text }
+      <span className={className}>{ text }</span>
     </Editable>
   );
 };

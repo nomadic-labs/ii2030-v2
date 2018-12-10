@@ -40,15 +40,15 @@ export function toggleEditing() {
   return { type: "TOGGLE_EDITING" };
 }
 
-export function toggleNewPageModal() {
-  return { type: "TOGGLE_NEW_PAGE_MODAL" };
+export function toggleNewTrackModal() {
+  return { type: "TOGGLE_NEW_TRACK_MODAL" };
 }
 
 export function updatePage(pageId, contentId, content) {
   return dispatch => {
     const db = firebase.database();
 
-    db.ref(`pages/${pageId}/content/${contentId}/`).update(content, error => {
+    db.ref(`pages/${pageId}/content/${contentId}/`).set(content, error => {
       if (error) {
         return dispatch(
           showNotification(
@@ -58,7 +58,7 @@ export function updatePage(pageId, contentId, content) {
         );
       }
 
-      dispatch(updatePageData(contentId, content));
+      dispatch(updatePageContent(contentId, content));
       dispatch(
         showNotification(
           "Your changes have been saved. Publish your changes to make them public.",
@@ -115,10 +115,12 @@ export function loadPageData(data) {
   return { type: "LOAD_PAGE_DATA", data };
 }
 
-export function updatePageData(contentId, content) {
-  console.log("updating", contentId);
-  console.log("content", content);
-  return { type: "UPDATE_PAGE_DATA", contentId, content };
+export function updatePageContent(contentId, content) {
+  return { type: "UPDATE_PAGE_CONTENT", contentId, content };
+}
+
+export function updatePageData(content) {
+  return { type: "UPDATE_PAGE_DATA", content };
 }
 
 // NAVIGATION ------------------------
@@ -183,14 +185,29 @@ export function submitProjectForm(formData, e) {
 
 
 export function createTrack(trackData) {
-  return { type: "CREATE_TRACK", trackData }
+  return dispatch => {
+    const db = firebase.database();
+    db
+      .ref("tracks")
+      .push(trackData)
+      .then(snap => {
+        dispatch(toggleNewTrackModal());
+        dispatch(
+          showNotification(
+            "Your page has been saved. Publish your changes to view and edit your new page.",
+            "success"
+          )
+        );
+      });
+  };
 }
 
-export function updateTrack(trackId, contentId, content) {
+
+export function saveTrackContent(trackId, contentId, content) {
   return dispatch => {
     const db = firebase.database();
 
-    db.ref(`tracks/${trackId}/content/${contentId}/`).update(content, error => {
+    db.ref(`tracks/${trackId}/content/${contentId}/`).set(content, error => {
       if (error) {
         return dispatch(
           showNotification(
@@ -200,7 +217,7 @@ export function updateTrack(trackId, contentId, content) {
         );
       }
 
-      dispatch(updatePageData(contentId, content));
+      dispatch(updatePageContent(contentId, content));
       dispatch(
         showNotification(
           "Your changes have been saved. Publish your changes to make them public.",
@@ -211,5 +228,30 @@ export function updateTrack(trackId, contentId, content) {
   };
 }
 
+export function saveTrackData(trackId, field, content) {
+  return dispatch => {
+    const db = firebase.database();
 
+    const data = {
+      [field]: content
+    };
+
+    db.ref(`tracks/${trackId}`).set(data).then(res => {
+      dispatch(updatePageData({ [field]: content }));
+      dispatch(
+        showNotification(
+          "Your changes have been saved. Publish your changes to make them public.",
+          "success"
+        )
+      );
+    }).catch(err => {
+      dispatch(
+        showNotification(
+          `There was an error saving your changes: ${err}`,
+            "danger"
+        )
+      );
+    })
+  };
+}
 

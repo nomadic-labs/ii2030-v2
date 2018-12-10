@@ -8,13 +8,16 @@ import {
   userLoggedIn,
   userLoggedOut,
   deploy,
-  toggleEditing
+  toggleEditing,
+  toggleNewTrackModal
 } from "../../redux/actions";
 
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 import SettingsIcon from "@material-ui/icons/Settings";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+
+import CreateTrackModal from "./CreateTrackModal";
 
 const styles = {
   container: {
@@ -121,6 +124,17 @@ class AccountButton extends React.Component {
             {props.allowEditing && (
               <MenuItem
                 onClick={() => {
+                  props.toggleNewTrackModal();
+                  closeMenu();
+                }}
+              >
+                Add track
+              </MenuItem>
+            )}
+
+            {props.allowEditing && (
+              <MenuItem
+                onClick={() => {
                   props.deploy();
                   closeMenu();
                 }}
@@ -140,6 +154,7 @@ class AccountButton extends React.Component {
               Log out
             </MenuItem>
           </Menu>
+          <CreateTrackModal />
         </div>
       );
     }
@@ -172,6 +187,9 @@ const mapDispatchToProps = dispatch => {
     },
     deploy: () => {
       dispatch(deploy());
+    },
+    toggleNewTrackModal: () => {
+      dispatch(toggleNewTrackModal());
     }
   };
 };

@@ -11,6 +11,8 @@ export const adminTools = (state={}, action) => {
       return { ...state, isEditingPage: !state.isEditingPage }
     case 'TOGGLE_REGISTRATION_MODAL':
       return { ...state, showRegistrationModal: !state.showRegistrationModal }
+    case 'TOGGLE_NEW_TRACK_MODAL':
+      return { ...state, showNewTrackModal: !state.showNewTrackModal }
     default:
       return state
   }
@@ -60,6 +62,14 @@ export const page = (state={}, action) => {
         data: action.data
       }
     case 'UPDATE_PAGE_DATA':
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          ...action.content
+        }
+      }
+    case 'UPDATE_PAGE_CONTENT':
       return {
         ...state,
         data: {

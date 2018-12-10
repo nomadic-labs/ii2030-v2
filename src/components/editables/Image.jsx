@@ -12,6 +12,7 @@ const styles = {
     flexDirection: 'column',
   },
   image: {
+    height: 'auto',
     width: '100%'
   }
 }
@@ -33,7 +34,7 @@ const Image = (props) => {
     >
       <div className='img edit-container' style={styles.imageContainer}>
         <img src={imageSrc} alt={caption} style={styles.image} />
-        <small>{caption}</small>
+        { props.showCaption && <small>{caption}</small> }
       </div>
     </Editable>
   );
@@ -45,7 +46,7 @@ Image.propTypes = {
 }
 
 Image.defaultProps = {
-  content: { imageSrc: '/images/head-with-bubble.png' },
+  content: { imageSrc: '/images/camera.svg' },
   onSave: content => console.log('Implement a function to save changes!', content),
 }
 

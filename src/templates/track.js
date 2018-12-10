@@ -2,7 +2,8 @@ import React from "react";
 import { graphql } from "gatsby";
 import { connect } from "react-redux";
 import {
-  updateTrack,
+  saveTrackContent,
+  saveTrackData,
   loadPageData,
 } from "../redux/actions";
 
@@ -24,8 +25,11 @@ import "slick-carousel/slick/slick-theme.css";
 
 const mapDispatchToProps = dispatch => {
   return {
+    onUpdateTrackContent: (track, id, data) => {
+      dispatch(saveTrackContent(track, id, data));
+    },
     onUpdateTrackData: (track, id, data) => {
-      dispatch(updateTrack(track, id, data));
+      dispatch(saveTrackData(track, id, data));
     },
     onLoadPageData: data => {
       dispatch(loadPageData(data));
@@ -35,13 +39,13 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    pageData: state.page.data
+    pageData: state.page.data,
+    isEditingPage: state.adminTools.isEditingPage,
   };
 };
 
 class TrackTemplate extends React.Component {
   componentDidMount() {
-    console.log("component did mount", this.props)
     const initialPageData = {
       ...this.props.data.tracks,
       content: JSON.parse(this.props.data.tracks.content)
@@ -52,20 +56,19 @@ class TrackTemplate extends React.Component {
 
   onSave = fieldId => content => {
     const { id } = this.props.data.tracks;
-    this.props.onUpdateTrackData(id, fieldId, content);
+    this.props.onUpdateTrackContent(id, fieldId, content);
   };
 
+  onSaveTitle = content => {
+    const { id } = this.props.data.tracks;
+    this.props.onUpdateTrackData(id, "title", content.text)
+  }
+
   render() {
+    const title = this.props.pageData ? this.props.pageData.title : "";
     const content = this.props.pageData ? this.props.pageData.content : {};
-    console.log("content", content)
-    const tourStops = [
-      { organization: "eKutir", description: "Some description goes here", imageSrc: "/images/rocket.png" },
-      { organization: "Another company", description: "Some description goes here", imageSrc: "/images/rocket.png" },
-    ]
-    const introSlides = [
-      { question: "What is disruptive technology doing for agriculture?", answer: "Precision agriculture allows farmers... " },
-      { question: "Why do we need more inclusive solutions?", answer: "Precision agriculture allows farmers... " }
-    ]
+    const tourStops = content["tour-stops"] || [];
+    const introSlides = content["intro-slides"] || [];
 
     return (
       <Layout>
@@ -73,15 +76,15 @@ class TrackTemplate extends React.Component {
           <Section id="track-landing">
             <div className="outer-container">
               <Grid container>
-                <Grid xs={12} md={6}>
+                <Grid item xs={12} md={6}>
                   <div className="horiz-spacing vert-spacing">
-                    <Title level="h3" content={ content["page-title"] } onSave={this.onSave('page-title')} />
+                    <Title level="h3" content={ { text: title } } onSave={this.onSaveTitle} />
                     <div className="big-question">
                       <Title level="h1" content={ content["topic"] } onSave={this.onSave('topic')} />
                     </div>
                   </div>
                 </Grid>
-                <Grid xs={12} md={6}>
+                <Grid item xs={12} md={6}>
                   <div className="track-icon image-container vert-spacing">
                     <Image content={ content["icon"] } onSave={this.onSave('icon')} />
                   </div>
@@ -98,25 +101,25 @@ class TrackTemplate extends React.Component {
           </Section>
 
           {
-            content["track-lead"] &&
-            <Section id="track-lead">
+            (content["track-lead"] || this.props.isEditingPage) &&
+            <Section id="track-lead" className="background-container">
               <div className="track-lead">
-                <div className="background-container">
                   <Grid container>
                     <Grid item xs={12} md={6}>
                       <div className="image-container">
-                        <Image src={content["track-lead"]["image"]} alt={content["track-lead"]["name"]} className="pure-img" onSave={this.onSave('icon')}/>
+                        <Image src={content["track-lead"] ? content["track-lead"]["image"] : ""} alt={content["track-lead"] ? content["track-lead"]["name"] : ""} className="pure-img" onSave={this.onSave('icon')}/>
                       </div>
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <div className="text vert-spacing horiz-spacing">
                         <h3>Track lead</h3>
-                        <p>{`${content["track-lead"]["name"]}, ${content["track-lead"]["position"]}`}</p>
-                        <p className="quote">{content["track-lead"]["quote"]}</p>
+                        <Paragraph content={content["track-lead"] ? content["track-lead"]["name"] : { text: "Name and position" } } />
+                        <div className="quote">
+                          <Paragraph content={content["track-lead"] ? content["track-lead"]["quote"] : { text: "Quote or bio" } } />
+                        </div>
                       </div>
                     </Grid>
                   </Grid>
-                </div>
               </div>
             </Section>
           }
@@ -162,7 +165,7 @@ class TrackTemplate extends React.Component {
                       </div>
                     </header>
 
-                    <TourStops stops={tourStops} />
+                    <TourStops slides={tourStops} />
                   </section>
 
                 </div>
