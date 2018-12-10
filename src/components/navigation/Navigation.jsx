@@ -2,18 +2,21 @@ import React from "react";
 import { StaticQuery, graphql } from "gatsby"
 import { Link } from "gatsby";
 
-import Grid from "@material-ui/core/Grid"
 import ToolBar from "@material-ui/core/ToolBar"
 import Button from "@material-ui/core/Button"
 import AppBar from "@material-ui/core/AppBar"
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Grid from '@material-ui/core/Grid';
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const styles = {
   menuItem: {
     fontWeight: 100,
     fontSize: '16px',
+  },
+  grow: {
+    flexGrow: 1,
   }
 }
 
@@ -135,13 +138,22 @@ class Navigation extends React.Component {
 
     return (
       <AppBar position="fixed" color="default" id="menu">
-        <ToolBar>
-          <Button to={'/'} component={Link} color="secondary" className="menu-heading">ii2030</Button>
-          <OverviewDropdown />
-          <TracksDropdown anchorText={"Past tracks"} tracks={tracks2017} />
-          <TracksDropdown anchorText={"2019 Tracks"} tracks={tracks2019} />
-          <Button to={'/faqs'} component={Link}>FAQs</Button>
-        </ToolBar>
+          <Grid container justify="space-between">
+            <Grid item style={styles.grow}>
+              <ToolBar>
+                <Button to={'/'} component={Link} color="secondary" className="menu-heading">ii2030</Button>
+                <OverviewDropdown />
+                <TracksDropdown anchorText={"Past tracks"} tracks={tracks2017} />
+                <TracksDropdown anchorText={"2019 Tracks"} tracks={tracks2019} />
+                <Button to={'/faqs'} component={Link}>FAQs</Button>
+              </ToolBar>
+            </Grid>
+            <Grid item>
+              <ToolBar>
+                <Button to={'/blog'} component={Link} color="secondary" variant="contained" className="menu-heading">Register</Button>
+              </ToolBar>
+            </Grid>
+          </Grid>
       </AppBar>
     );
   }

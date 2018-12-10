@@ -93,7 +93,7 @@ section#timeline {
       padding: 0 10%;
 
       button {
-        background-color: $off-white;
+        background-color: $dark-red;
         border-radius: 50%;
 
         &:before {
@@ -118,7 +118,7 @@ section#timeline {
 
       &:after {
         content: '';
-        width: 0%;
+        width: 100%;
         outline: 2px solid $dark-red;
         position: absolute;
         z-index: -1;
@@ -163,13 +163,13 @@ section#timeline {
         }
       }
 
-      &.slick-active, &.still-active {
+      &.slick-active ~ li {
         button {
-          background-color: $dark-red;
+          background-color: $off-white;
         }
 
         &:after {
-          width: 100%;
+          width: 0%;
         }
       }
     }

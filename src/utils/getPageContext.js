@@ -13,9 +13,9 @@ const theme = createMuiTheme({
       dark: "#2f4858",
     },
     secondary: {
-      light: "#fcb239",
-      main: "#da900a", // orange
-      dark: "ab3911",
+      light: "#ab3911",
+      main: "#ab3911", // orange
+      dark: "#712206",
     },
     background: {
       default: "#fff",
@@ -30,8 +30,8 @@ const theme = createMuiTheme({
     color: '#2F4858',
     display1: {
       fontFamily: `'Roboto Condensed', cursive`,
-      letterSpacing: "0.05rem",
-      textTransform: "uppercase",
+      textTransform: 'uppercase',
+      // letterSpacing: "0.05rem",
       fontSize: "3.333em",
       color: '#DA900A',
       fontWeight: 700,
@@ -40,8 +40,8 @@ const theme = createMuiTheme({
     },
     display2: {
       fontFamily: `'Roboto Condensed', cursive`,
-      letterSpacing: "0.05rem",
-      textTransform: "uppercase",
+      textTransform: 'uppercase',
+      // letterSpacing: "0.05rem",
       fontSize: "2.222em",
       color: '#DA900A',
       fontWeight: 700,
@@ -66,15 +66,15 @@ const theme = createMuiTheme({
     },
     title: {
       fontFamily: `'Roboto Condensed', cursive`,
+      textTransform: 'uppercase',
       letterSpacing: "0.05rem",
-      textTransform: "uppercase",
       color: '#DA900A',
       fontWeight: 700,
     },
     headline: {
       fontFamily: `'Roboto Condensed', cursive`,
+      textTransform: 'uppercase',
       letterSpacing: "0.05rem",
-      textTransform: "uppercase",
       fontSize: "1.667em",
       color: '#DA900A',
       fontWeight: 700,
