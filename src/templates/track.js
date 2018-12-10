@@ -54,6 +54,17 @@ class TrackTemplate extends React.Component {
     this.props.onLoadPageData(initialPageData);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.data.tracks.id !== this.props.data.tracks.id) {
+      const initialPageData = {
+        ...this.props.data.tracks,
+        content: JSON.parse(this.props.data.tracks.content)
+      };
+
+      this.props.onLoadPageData(initialPageData);
+    }
+  }
+
   onSave = fieldId => content => {
     const { id } = this.props.data.tracks;
     this.props.onUpdateTrackContent(id, fieldId, content);
