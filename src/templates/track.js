@@ -15,6 +15,9 @@ import Title from "../components/editables/Title";
 import Paragraph from "../components/editables/Paragraph";
 import Image from "../components/editables/Image";
 
+import tourImage from "../assets/images/tour-detailed.png"
+import factoryImage from "../assets/images/factory-detailed.png"
+
 import IntroSlides from "../components/track/IntroSlides"
 import TourStops from "../components/track/TourStops"
 
@@ -156,7 +159,7 @@ class TrackTemplate extends React.Component {
                         <Grid item xs={12} md={6}>
                           <div className="vert-center horiz-center">
                             <div className="image oversize">
-                              <img src="/images/tour-detailed.png" alt="ii2030" className="pure-img" />
+                              <img src={tourImage} alt="ii2030" className="pure-img" />
                             </div>
                           </div>
                         </Grid>
@@ -201,7 +204,7 @@ class TrackTemplate extends React.Component {
                         <Grid item xs={12} md={6}>
                           <div className="vert-center horiz-center">
                             <div className="image oversize">
-                              <img src="/images/factory-detailed.png" alt="ii2030" className="pure-img" />
+                              <img src={factoryImage} alt="ii2030" className="pure-img" />
                             </div>
                           </div>
                         </Grid>
