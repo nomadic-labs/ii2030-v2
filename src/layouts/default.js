@@ -1,32 +1,30 @@
 import React from "react";
 import Helmet from "react-helmet";
-import withRoot from '../utils/withRoot';
+import withRoot from "../utils/withRoot";
 
 import Notification from "../components/notifications/Notification";
-import AccountButton from "../components/navigation/AccountButton"
-import Navigation from "../components/navigation/Navigation"
-import Footer from "../components/navigation/Footer"
+import AccountButton from "../components/navigation/AccountButton";
+import Navigation from "../components/navigation/Navigation";
+import Footer from "../components/navigation/Footer";
 
 import "../assets/sass/custom.scss";
-import favicon from '../assets/images/icon.png'
+import favicon from "../assets/images/icon.png";
 
 const styles = {
   container: {
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column"
   },
   content: {
-    flexGrow: '1'
+    flexGrow: "1"
   }
-}
+};
 
 const DefaultLayout = props => (
   <div style={styles.container}>
     <Helmet>
-      <title>
-        Inclusive Innovation 2030 | ii2030
-      </title>
+      <title>Inclusive Innovation 2030 | ii2030</title>
       <meta
         charSet="utf-8"
         description="Simple and flexible CMS for static sites"
@@ -38,7 +36,9 @@ const DefaultLayout = props => (
     <Navigation />
     <Notification />
     <AccountButton />
-    <div className='page-content' style={styles.content}>{props.children}</div>
+    <div className="page-content" style={styles.content}>
+      {props.children}
+    </div>
     <Footer />
   </div>
 );

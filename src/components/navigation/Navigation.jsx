@@ -2,7 +2,7 @@ import React from "react";
 import { StaticQuery, graphql } from "gatsby"
 import { Link } from "gatsby";
 
-import ToolBar from "@material-ui/core/ToolBar"
+import Toolbar from "@material-ui/core/Toolbar"
 import Button from "@material-ui/core/Button"
 import AppBar from "@material-ui/core/AppBar"
 import MenuItem from '@material-ui/core/MenuItem';
@@ -146,18 +146,18 @@ class Navigation extends React.Component {
       <AppBar position="fixed" style={styles.menu} id="menu">
           <Grid container justify="space-between">
             <Grid item style={styles.grow}>
-              <ToolBar>
+              <Toolbar>
                 <Button to={'/'} component={Link} color="secondary" className="menu-heading">ii2030</Button>
                 <OverviewDropdown />
                 <TracksDropdown anchorText={"Past tracks"} tracks={tracks2017} />
                 <TracksDropdown anchorText={"2019 Tracks"} tracks={tracks2019} />
                 <Button to={'/faqs'} component={Link}>FAQs</Button>
-              </ToolBar>
+              </Toolbar>
             </Grid>
             <Grid item>
-              <ToolBar>
+              <Toolbar>
                 <Button to={'/#/'} component={Link} color="secondary" variant="contained" className="menu-heading">Register</Button>
-              </ToolBar>
+              </Toolbar>
             </Grid>
           </Grid>
       </AppBar>
