@@ -186,7 +186,7 @@ class HomePage extends React.Component {
                   <div className="horiz-spacing vert-spacing">
                     <Title level="title" content={ content["landing-title"] } onSave={this.saveHandler('landing-title')} />
                     <div className="vert-spacing">
-                      <Title level="h3" content={ content["landing-subtitle"] } onSave={this.saveHandler('landing-subtitle')} />
+                      <Paragraph content={ content["landing-subtitle"] } onSave={this.saveHandler('landing-subtitle')} />
                     </div>
                     <Button component={Link} to="#overview" className="btn orange animate">Learn more</Button>
                   </div>
@@ -219,7 +219,7 @@ class HomePage extends React.Component {
             <TimelineSlider slides={ content["timeline-slides"] } onSave={this.saveHandler("timeline-slides")} />
           </Section>
 
-          <Section>
+          <Section id="tracks">
             <header className="text-center">
               <Title level="h2" content={ content["tracks-title"] } onSave={this.saveHandler('tracks-title')} />
               <div className="headline vert-spacing">
@@ -229,7 +229,7 @@ class HomePage extends React.Component {
               </div>
             </header>
           </Section>
-          <Section id="tracks" className="content background-container">
+          <Section id="tracks-display" className="content background-container">
             <Grid container justify="center" className="pure-g tracks">
               {
                 tracks.map((node, i) => {

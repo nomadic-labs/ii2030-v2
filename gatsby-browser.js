@@ -23,3 +23,21 @@ export const replaceRouterComponent = ({ history }) => {
 
   return ConnectedRouterWrapper;
 };
+
+export const onRouteUpdate = (route) => {
+  const location = route.location
+
+  if (location && location.hash) {
+    setTimeout(() => {
+      const el = document.querySelector(location.hash)
+      if (el) {
+        const top = el.offsetTop - 40
+        window.scrollTo({
+          behavior: 'smooth',
+          top,
+        })
+        return true
+      }
+    }, 0);
+  }
+};
