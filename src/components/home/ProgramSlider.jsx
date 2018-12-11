@@ -11,6 +11,8 @@ import tourIcon from "../../assets/images/tour-icon-standardized.png"
 import tourIconLabelled from "../../assets/images/tour-icon-standardized-labelled.png"
 import factoryIcon from "../../assets/images/factory-icon-standardized.png"
 import factoryIconLabelled from "../../assets/images/factory-icon-standardized-labelled.png"
+import factory from "../../assets/images/factory-icon.png"
+import tour from "../../assets/images/tour-icon.png"
 
 export default class ProgramSlider extends React.Component {
   state = {
@@ -32,13 +34,17 @@ export default class ProgramSlider extends React.Component {
     return(
       <div>
         <div className="day-selector">
-          <button data-day="day-1" className={`btn btn-day1 white day-1 ${(this.state.slideIndex === 0) && 'active'}`} onClick={() => this.goToSlide(0)}>Day 1: Tour</button>
-          <button data-day="day-2" className={`btn btn-day2 white day-2 ${(this.state.slideIndex === 1) && 'active'}`} onClick={() => this.goToSlide(1)}>Day 2: Factory</button>
+          <button data-day="day-1" className={`btn btn-day1 white day-1 ${(this.state.slideIndex === 0) && 'active'}`} onClick={() => this.goToSlide(0)}>
+            <img src={tour} alt="" />Day 1: Tour
+          </button>
+          <button data-day="day-2" className={`btn btn-day2 white day-2 ${(this.state.slideIndex === 1) && 'active'}`} onClick={() => this.goToSlide(1)}>
+            Day 2: Factory<img src={factory} alt="" />
+          </button>
         </div>
 
         <Slider { ...sliderSettings } ref={slider => (this.slider = slider)}>
 
-          <div className="tour-agenda">
+          <div className="tour-agenda vert-spacing">
             <Grid container>
               <Grid item xs={12} md={6}>
                 <div className="image oversize">

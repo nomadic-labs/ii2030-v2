@@ -67,6 +67,8 @@ class TrackTemplate extends React.Component {
 
   onSave = fieldId => content => {
     const { id } = this.props.data.tracks;
+    console.log(`Saving ${fieldId}`)
+    console.log(content)
     this.props.onUpdateTrackContent(id, fieldId, content);
   };
 
@@ -91,13 +93,14 @@ class TrackTemplate extends React.Component {
                   <div className="horiz-spacing vert-spacing">
                     <Title level="h3" content={ { text: title } } onSave={this.onSaveTitle} />
                     <div className="big-question">
-                      <Title level="h1" content={ content["topic"] } onSave={this.onSave('topic')} />
+                      <Title level="h2" content={ content["topic"] } onSave={this.onSave('topic')} />
                     </div>
                   </div>
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <div className="track-icon image-container vert-spacing">
                     <Image content={ content["icon"] } onSave={this.onSave('icon')} />
+                    { this.props.isEditingPage && <Image content={ content["icon-small"] } onSave={this.onSave('icon-small')} /> }
                   </div>
                 </Grid>
               </Grid>
@@ -107,7 +110,7 @@ class TrackTemplate extends React.Component {
           <Section id="track-description" className="background-container dark">
             <div className="outer-container">
               <div className="slider-nav"></div>
-              <IntroSlides slides={introSlides} />
+              <IntroSlides slides={introSlides} onSave={this.onSave("intro-slides")} />
             </div>
           </Section>
 
@@ -118,15 +121,15 @@ class TrackTemplate extends React.Component {
                   <Grid container>
                     <Grid item xs={12} md={6}>
                       <div className="image-container">
-                        <Image src={content["track-lead"] ? content["track-lead"]["image"] : ""} alt={content["track-lead"] ? content["track-lead"]["name"] : ""} className="pure-img" onSave={this.onSave('icon')}/>
+                        <Image content={content["track-lead-image"]} className="pure-img" onSave={this.onSave("track-lead-image")} />
                       </div>
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <div className="text vert-spacing horiz-spacing">
                         <h3>Track lead</h3>
-                        <Paragraph content={content["track-lead"] ? content["track-lead"]["name"] : { text: "Name and position" } } />
+                        <Paragraph content={content["track-lead-name"]} onSave={this.onSave("track-lead-name")} />
                         <div className="quote">
-                          <Paragraph content={content["track-lead"] ? content["track-lead"]["quote"] : { text: "Quote or bio" } } />
+                          <Paragraph content={content["track-lead-quote"]} onSave={this.onSave("track-lead-quote")} />
                         </div>
                       </div>
                     </Grid>
@@ -170,13 +173,13 @@ class TrackTemplate extends React.Component {
 
                   <section id="tour-stops">
                     <header className="text-center">
-                      <Title level="h2" content={ content["tour-stops-title"] } onSave={this.onSave('tour-stops-title')} />
+                      <Title level="headline" content={ content["tour-stops-title"] } onSave={this.onSave('tour-stops-title')} />
                       <div className="headline vert-spacing">
                         <Paragraph content={ content["tour-stops-subtitle"] } onSave={this.onSave('tour-stops-subtitle')} />
                       </div>
                     </header>
 
-                    <TourStops slides={tourStops} />
+                    <TourStops slides={tourStops} onSave={this.onSave("tour-stops")} />
                   </section>
 
                 </div>
@@ -215,7 +218,7 @@ class TrackTemplate extends React.Component {
 
                   <section id="factory-outputs">
                     <header className="text-center">
-                      <Title level="h2" content={ content["factory-outputs-title"] } onSave={this.onSave('factory-outputs-title')} />
+                      <Title level="headline" content={ content["factory-outputs-title"] } onSave={this.onSave('factory-outputs-title')} />
                     </header>
                     <div className="text horiz-spacing">
                       <Paragraph content={ content["factory-outputs-description"] } onSave={this.onSave('factory-outputs-description')} />

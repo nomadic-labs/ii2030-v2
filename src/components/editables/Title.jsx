@@ -6,6 +6,8 @@ import Editable from "./Editable";
 import PlainTextEditor from "../editingTools/PlainTextEditor";
 
 const variantLookup = {
+  title: 'title',
+  headline: 'headline',
   h1: 'display1',
   h2: 'display2',
   h3: 'display3',

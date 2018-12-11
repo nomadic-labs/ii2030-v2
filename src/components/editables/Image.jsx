@@ -10,6 +10,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
+    width: '100%',
   },
   image: {
     height: 'auto',

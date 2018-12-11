@@ -15,6 +15,18 @@ export default class IntroSlides extends React.Component {
     this.setState({ slideIndex })
   }
 
+  onSavePassthrough = (key, fieldId) => content => {
+    const slides = {
+      ...this.props.slides,
+      [key]: {
+        ...this.props.slides[key],
+        [fieldId]: content
+      }
+    }
+
+    this.props.onSave(slides)
+  }
+
   render() {
     const sliderSettings = {
       dots: true,
@@ -35,9 +47,9 @@ export default class IntroSlides extends React.Component {
                 <div className="slide" key={`intro-slide-${question}`}>
                   <div className="text horiz-spacing">
                     <div className="headline vert-spacing">
-                      <Title level="h2" content={slide["question"]} />
+                      <Title level="h2" content={slide["question"]} onSave={this.onSavePassthrough(question, "question")} />
                     </div>
-                    <Paragraph content={slide["answer"]} />
+                    <Paragraph content={slide["answer"]} onSave={this.onSavePassthrough(question, "answer")} />
                   </div>
                 </div>
               )

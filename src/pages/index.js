@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import { connect } from "react-redux";
 import {
   updatePage,
@@ -8,6 +8,7 @@ import {
 
 import Grid from "@material-ui/core/Grid"
 import Button from "@material-ui/core/Button"
+import Typography from "@material-ui/core/Typography"
 
 import Layout from "../layouts/default.js";
 import Section from "../layouts/Section";
@@ -23,6 +24,9 @@ import Participants from "../components/home/Participants"
 import ProgramSlider from "../components/home/ProgramSlider"
 
 import endevaLogo from "../assets/images/logos/endeva.png"
+import chatIcon from "../assets/images/chat.png"
+import groupIcon from "../assets/images/group.png"
+import rocketIcon from "../assets/images/rocket.png"
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -180,13 +184,11 @@ class HomePage extends React.Component {
               <Grid container>
                 <Grid item xs={12} md={6} className="pure-u-1 pure-u-md-1-2 vert-center on-top">
                   <div className="horiz-spacing vert-spacing">
-                    <Title level="h1" content={ content["landing-title"] } onSave={this.saveHandler('landing-title')} />
+                    <Title level="title" content={ content["landing-title"] } onSave={this.saveHandler('landing-title')} />
                     <div className="vert-spacing">
                       <Title level="h3" content={ content["landing-subtitle"] } onSave={this.saveHandler('landing-subtitle')} />
                     </div>
-                    <a data-scroll href="#overview">
-                      <button className="btn orange animate">Learn more</button>
-                    </a>
+                    <Button component={Link} to="#overview" className="btn orange animate">Learn more</Button>
                   </div>
                 </Grid>
                 <Grid item xs={12} md={6} className="pure-u-1 pure-u-md-1-2 image-container">
@@ -196,7 +198,7 @@ class HomePage extends React.Component {
             </div>
           </Section>
 
-          <Section id="overview">
+          <Section id="overview" data-aos="fade-up">
             <header className="text-center">
               <Title level="h2" content={ content["overview-title"] } onSave={this.saveHandler('overview-title')} />
               <div className="headline vert-spacing">
@@ -252,7 +254,7 @@ class HomePage extends React.Component {
               <Grid item xs={12} md={4}>
                 <div className="content-container">
                     <div className="image">
-                      <img src="/images/chat.png" alt="" className="pure-img" />
+                      <img src={chatIcon} alt="" className="pure-img" />
                     </div>
                     <div className="text-center">
                       <Title level="h3" content={ content["process-step1-title"] } onSave={this.saveHandler('process-step1-title')} />
@@ -264,7 +266,7 @@ class HomePage extends React.Component {
               <Grid item xs={12} md={4}>
                 <div className="content-container">
                     <div className="image">
-                      <img src="/images/group.png" alt="" className="pure-img" />
+                      <img src={groupIcon} alt="" className="pure-img" />
                     </div>
                     <div className="text-center">
                       <Title level="h3" content={ content["process-step2-title"] } onSave={this.saveHandler('process-step2-title')} />
@@ -276,7 +278,7 @@ class HomePage extends React.Component {
               <Grid item xs={12} md={4}>
                 <div className="content-container">
                     <div className="image">
-                      <img src="/images/rocket.png" alt="" className="pure-img" />
+                      <img src={rocketIcon} alt="" className="pure-img" />
                     </div>
                     <div className="text-center">
                       <Title level="h3" content={ content["process-step3-title"] } onSave={this.saveHandler('process-step3-title')} />
@@ -292,11 +294,11 @@ class HomePage extends React.Component {
               <Title level="h2" content={ content["partners-title"] } onSave={this.saveHandler('partners-title')} />
             </header>
             <div className="host partner-group headline">
-              <h3>An <a href="http://www.endeva.org/" target="_blank" rel="noopener noreferrer"><img id="endeva-logo" src={endevaLogo} alt="Endeva logo" /></a> initiative</h3>
+              <Typography variant="display3">An <a href="http://www.endeva.org/" target="_blank" rel="noopener noreferrer"><img id="endeva-logo" src={endevaLogo} alt="Endeva logo" /></a> initiative</Typography>
             </div>
             <div className="partner-group">
               <div className="headline">
-                <h3>Co-hosted by </h3>
+                <Typography variant="display3">Co-hosted by </Typography>
               </div>
               <div className="logos">
                 { cohosts.map((entity, i) => <LogoDisplay key={`cohost-${i}`} index={i} entity={entity} onDelete={this.props.isEditingPage ? this.deleteCohost : null} onSave={this.editCohost} />) }
@@ -305,7 +307,7 @@ class HomePage extends React.Component {
             </div>
             <div className="partner-group">
               <div className="headline">
-                <h3>Partners</h3>
+                <Typography variant="display3">Partners</Typography>
               </div>
               <div className="logos">
                 { partners.map((entity, i) => <LogoDisplay key={`partner-${i}`} index={i} entity={entity} onDelete={this.props.isEditingPage ? this.deletePartner : null} onSave={this.editPartner} />) }
@@ -340,7 +342,7 @@ export const query = graphql`
       title
       slug
     }
-    allTracks(filter: { year: { eq: 2017 }}) {
+    allTracks(filter: { year: { eq: 2019 }}) {
       edges {
         node {
           id

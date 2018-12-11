@@ -17,6 +17,10 @@ const styles = {
   },
   grow: {
     flexGrow: 1,
+  },
+  menu: {
+    backgroundColor: "#fff",
+    color: "rgba(0, 0, 0, 0.87)"
   }
 }
 
@@ -52,13 +56,14 @@ class TracksDropdown extends React.Component {
         <Menu
           id="menu-appbar"
           anchorEl={anchorEl}
+          getContentAnchorEl={null}
           anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
+            vertical: 'bottom',
+            horizontal: 'left',
           }}
           transformOrigin={{
             vertical: 'top',
-            horizontal: 'right',
+            horizontal: 'left',
           }}
           open={open}
           onClose={this.handleClose}
@@ -104,13 +109,14 @@ class OverviewDropdown extends React.Component {
         <Menu
           id="menu-appbar"
           anchorEl={anchorEl}
+          getContentAnchorEl={null}
           anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
+            vertical: 'bottom',
+            horizontal: 'left',
           }}
           transformOrigin={{
             vertical: 'top',
-            horizontal: 'right',
+            horizontal: 'left',
           }}
           open={open}
           onClose={this.handleClose}
@@ -137,7 +143,7 @@ class Navigation extends React.Component {
     const tracks2019 = tracks.filter(track => track.node.year === 2019)
 
     return (
-      <AppBar position="fixed" color="default" id="menu">
+      <AppBar position="fixed" style={styles.menu} id="menu">
           <Grid container justify="space-between">
             <Grid item style={styles.grow}>
               <ToolBar>
@@ -150,7 +156,7 @@ class Navigation extends React.Component {
             </Grid>
             <Grid item>
               <ToolBar>
-                <Button to={'/blog'} component={Link} color="secondary" variant="contained" className="menu-heading">Register</Button>
+                <Button to={'/#/'} component={Link} color="secondary" variant="contained" className="menu-heading">Register</Button>
               </ToolBar>
             </Grid>
           </Grid>

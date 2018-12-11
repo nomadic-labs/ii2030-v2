@@ -267,22 +267,6 @@ section#tour-factory {
       padding: $md-spacing;
     }
   }
-
-  section#factory-outputs {
-    ul {
-      list-style: none;
-
-      li {
-        &:before {
-          content: "\e061";
-          font-family: 'Material Icons';
-          font-size: 0.6em;
-          color: $orange;
-          margin-right: $lg-spacing;
-        }
-      }
-    }
-  }
 }
 
 h2.subtitle {

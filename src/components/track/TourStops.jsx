@@ -15,6 +15,12 @@ export default class TourStops extends React.Component {
     this.setState({ slideIndex })
   }
 
+  onSavePassthrough = (index, fieldId) => content => {
+    const newSlides = [...this.props.slides]
+    newSlides[index][fieldId] = content
+    this.props.onSave(newSlides)
+  }
+
   render() {
     const sliderSettings = {
       dots: true,
@@ -34,11 +40,11 @@ export default class TourStops extends React.Component {
                     <div className="pure-u-1">
 
                       <div className="image">
-                        <Image content={ slide["image"] } />
+                        <Image content={ slide["image"] } onSave={this.onSavePassthrough(i, "image")} />
                       </div>
 
-                      <Title level="h3" content={ slide["organization"] } />
-                      <Paragraph content={ slide["description"] } />
+                      <Title level="h3" content={ slide["organization"] } onSave={this.onSavePassthrough(i, "organization")} />
+                      <Paragraph content={ slide["description"] } onSave={this.onSavePassthrough(i, "description")} />
 
                     </div>
                   </div>

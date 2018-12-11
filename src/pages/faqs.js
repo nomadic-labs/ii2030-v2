@@ -70,6 +70,8 @@ class FrequentlyAskedQuestions extends React.Component {
 
     faqArray[index] = updatedFaq;
 
+    console.log("faqArray", faqArray)
+
     this.props.onUpdatePageData("faqs", "questions", faqArray);
   };
 
@@ -86,16 +88,16 @@ class FrequentlyAskedQuestions extends React.Component {
 
     const categories = {
       "General Information": [],
-      Registration: [],
-      Tickets: [],
+      "Registration": [],
+      "Tickets": [],
       "Partnerships & Sponsorship": []
     };
 
-    questions.forEach(question => {
+    questions.forEach((question, index) => {
       if (!categories[question.category]) {
         categories[question.category] = [];
       }
-
+      question.position = index
       categories[question.category].push(question);
     });
 
@@ -114,7 +116,7 @@ class FrequentlyAskedQuestions extends React.Component {
             {map(categories, (category, key) => {
               return (
                 <div key={`category-${key}`}>
-                  <Typography variant="display3" color="default">
+                  <Typography variant="headline" color="default">
                     {key}
                   </Typography>
                   {category.map((question, i) => (
@@ -123,13 +125,13 @@ class FrequentlyAskedQuestions extends React.Component {
                         <Title
                           level="h4"
                           content={question["question"]}
-                          onSave={this.editFaq(i, "question")}
+                          onSave={this.editFaq(question.position, "question")}
                         />
                       </ExpansionPanelSummary>
                       <ExpansionPanelDetails>
                         <Paragraph
                           content={question["answer"]}
-                          onSave={this.editFaq(i, "answer")}
+                          onSave={this.editFaq(question.position, "answer")}
                         />
                       </ExpansionPanelDetails>
                       {this.props.isEditingPage && (
