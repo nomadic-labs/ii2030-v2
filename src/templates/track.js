@@ -118,7 +118,7 @@ class TrackTemplate extends React.Component {
           </Section>
 
           {
-            (content["track-lead"] || this.props.isEditingPage) &&
+            (content["track-lead-name"] || this.props.isEditingPage) &&
             <Section id="track-lead" className="background-container">
               <div className="track-lead">
                   <Grid container>
