@@ -20,7 +20,7 @@ class TrackCard extends React.Component {
     return(
       <Grid item xs={12} sm={6} md={3} onMouseEnter={this.toggleActive} onMouseLeave={this.toggleActive}>
         <div className={`track text-center ${this.state.active && 'active'}`}>
-          <img src={ content["icon-small"]["imageSrc"] } alt="" />
+          <img src={ content["icon-small"] ? content["icon-small"]["imageSrc"] : "" } alt="" />
           <h4>{ trackData["tech"] }</h4>
           <p>{ content["topic"]["text"] }</p>
           <Link to={ trackData["slug"] }><button className="btn white animate hide-unless-active">Learn more</button></Link>

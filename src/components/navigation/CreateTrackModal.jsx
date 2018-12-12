@@ -75,7 +75,7 @@ class CreateTrackModal extends React.Component {
       page_type: "track",
       template: "track.js",
       navigation: {
-        order: this.state.page.order,
+        order: parseInt(this.state.page.order),
         displayTitle: this.state.page.tech,
       },
       content: defaultContentJSON
