@@ -70,7 +70,6 @@ class FrequentlyAskedQuestions extends React.Component {
 
     faqArray[index] = updatedFaq;
 
-    console.log("faqArray", faqArray)
 
     this.props.onUpdatePageData("faqs", "questions", faqArray);
   };
@@ -138,7 +137,7 @@ class FrequentlyAskedQuestions extends React.Component {
                         <ExpansionPanelActions>
                           <Button
                             color="default"
-                            onClick={this.deleteFaq(i)}
+                            onClick={this.deleteFaq(question.position)}
                           >
                             Delete
                           </Button>

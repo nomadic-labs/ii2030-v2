@@ -1,6 +1,7 @@
 import React from "react";
 import { StaticQuery, graphql } from "gatsby"
 import { Link } from "gatsby";
+import { sortBy } from 'lodash';
 
 import Toolbar from "@material-ui/core/Toolbar"
 import Button from "@material-ui/core/Button"
@@ -42,6 +43,7 @@ class TracksDropdown extends React.Component {
   render() {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
+    const orderedTracks = sortBy(this.props.tracks, ['node.navigation.order', 'node.tech'])
     return(
       <div>
         <Button
@@ -71,7 +73,7 @@ class TracksDropdown extends React.Component {
           onClose={this.handleClose}
         >
           {
-            this.props.tracks.map(track => <MenuItem onClick={this.handleClose} key={track.node.slug} component={Link} to={track.node.slug} style={styles.menuItem}>{track.node.tech}</MenuItem>)
+            orderedTracks.map(track => <MenuItem onClick={this.handleClose} key={track.node.slug} component={Link} to={track.node.slug} style={styles.menuItem}>{track.node.tech}</MenuItem>)
           }
         </Menu>
       </div>
@@ -188,6 +190,9 @@ export default () => (
               slug
               tech
               year
+              navigation {
+                order
+              }
             }
           }
         }
