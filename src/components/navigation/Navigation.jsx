@@ -153,8 +153,8 @@ class Navigation extends React.Component {
               <Toolbar>
                 <Button to={'/'} component={Link} color="secondary" className="menu-heading">ii2030</Button>
                 <OverviewDropdown />
-                <TracksDropdown anchorText={"Past tracks"} tracks={tracks2017} />
                 <TracksDropdown anchorText={"2019 Tracks"} tracks={tracks2019} />
+                <TracksDropdown anchorText={"Past tracks"} tracks={tracks2017} />
                 <Button to={'/faqs'} component={Link}>FAQs</Button>
               </Toolbar>
             </Grid>
