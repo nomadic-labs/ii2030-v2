@@ -12,11 +12,9 @@ const Footer = props => {
         <Grid container>
           <Grid item xs={12} md={6}>
             <p className="column-header">ii2030</p>
-            <p>Oct 18 - 19, 2017 | Berlin, Germany</p>
             <p className="contact">For more information:</p>
-            <p className="contact">Email: <a href="mailto:m.leahy@endeva.org">Megan Leahy-Wright</a></p>
-            <p className="contact">Facebook: <a href="https://www.facebook.com/inclusiveinnovation2030/">Inclusive Innovation 2030</a></p>
-            <p className="contact">Twitter: <a href="https://twitter.com/ii2030_Berlin">@ii2030_Berlin</a></p>
+            <p className="contact">Email: <a href="mailto:ii2030@endeva.org">ii2030@endeva.org</a></p>
+            <p className="contact">LinkedIn: <a href="https://www.linkedin.com/company/endeva/">Endeva</a></p>
           </Grid>
           <Grid item xs={12} md={6}>
             <p className="column-header">Site map</p>

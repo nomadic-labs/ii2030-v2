@@ -11,7 +11,6 @@ import Menu from '@material-ui/core/Menu';
 import Grid from '@material-ui/core/Grid';
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-// import EditableButton from "../editables/Button"
 
 const styles = {
   menuItem: {
@@ -160,7 +159,7 @@ class Navigation extends React.Component {
             </Grid>
             <Grid item>
               <Toolbar>
-                <Button to={'/#/'} component={Link} color="secondary" variant="contained" className="menu-heading">Register</Button>
+                <Button to={'/#/'} component={Link} color="secondary" variant="contained" className="menu-heading btn orange animate">Registration coming soon</Button>
               </Toolbar>
             </Grid>
           </Grid>

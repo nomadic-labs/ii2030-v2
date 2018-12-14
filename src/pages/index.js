@@ -239,14 +239,7 @@ class HomePage extends React.Component {
             </Grid>
           </Section>
 
-          <Section id="agenda">
-            <header className="text-center">
-              <Title level="h2" content={ content["agenda-title"] } onSave={this.saveHandler('agenda-title')} />
-            </header>
-            <ProgramSlider content={content} saveHandler={this.saveHandler} />
-          </Section>
-
-            <Section id="cocreation_process">
+          <Section id="cocreation_process">
             <header className="text-center">
               <Title level="h2" content={ content["process-title"] } onSave={this.saveHandler('process-title')} />
             </header>
@@ -289,41 +282,53 @@ class HomePage extends React.Component {
             </Grid>
           </Section>
 
-          <Section id="partners">
+          <Section id="agenda">
             <header className="text-center">
-              <Title level="h2" content={ content["partners-title"] } onSave={this.saveHandler('partners-title')} />
+              <Title level="h2" content={ content["agenda-title"] } onSave={this.saveHandler('agenda-title')} />
             </header>
-            <div className="host partner-group headline">
-              <Typography variant="display3">An <a href="http://www.endeva.org/" target="_blank" rel="noopener noreferrer"><img id="endeva-logo" src={endevaLogo} alt="Endeva logo" /></a> initiative</Typography>
-            </div>
-            <div className="partner-group">
-              <div className="headline">
-                <Typography variant="display3">Co-hosted by </Typography>
-              </div>
-              <div className="logos">
-                { cohosts.map((entity, i) => <LogoDisplay key={`cohost-${i}`} index={i} entity={entity} onDelete={this.props.isEditingPage ? this.deleteCohost : null} onSave={this.editCohost} />) }
-                { this.props.isEditingPage && <Button onClick={this.addCohost}>Add cohost</Button> }
-              </div>
-            </div>
-            <div className="partner-group">
-              <div className="headline">
-                <Typography variant="display3">Partners</Typography>
-              </div>
-              <div className="logos">
-                { partners.map((entity, i) => <LogoDisplay key={`partner-${i}`} index={i} entity={entity} onDelete={this.props.isEditingPage ? this.deletePartner : null} onSave={this.editPartner} />) }
-                { this.props.isEditingPage && <Button onClick={this.addPartner}>Add partner</Button> }
-              </div>
-            </div>
+            <ProgramSlider content={content} saveHandler={this.saveHandler} />
           </Section>
 
+          {
+            (Boolean(cohosts.length) || Boolean(partners.length) || this.props.isEditingPage) &&
+            <Section id="partners">
+              <header className="text-center">
+                <Title level="h2" content={ content["partners-title"] } onSave={this.saveHandler('partners-title')} />
+              </header>
+              <div className="host partner-group headline">
+                <Typography variant="display3">An <a href="http://www.endeva.org/" target="_blank" rel="noopener noreferrer"><img id="endeva-logo" src={endevaLogo} alt="Endeva logo" /></a> initiative</Typography>
+              </div>
+                <div className="partner-group">
+                  <div className="headline">
+                    <Typography variant="display3">Co-hosted by </Typography>
+                  </div>
+                  <div className="logos">
+                    { cohosts.map((entity, i) => <LogoDisplay key={`cohost-${i}`} index={i} entity={entity} onDelete={this.props.isEditingPage ? this.deleteCohost : null} onSave={this.editCohost} />) }
+                    { this.props.isEditingPage && <Button onClick={this.addCohost}>Add cohost</Button> }
+                  </div>
+                </div>
+              <div className="partner-group">
+                <div className="headline">
+                  <Typography variant="display3">Partners</Typography>
+                </div>
+                <div className="logos">
+                  { partners.map((entity, i) => <LogoDisplay key={`partner-${i}`} index={i} entity={entity} onDelete={this.props.isEditingPage ? this.deletePartner : null} onSave={this.editPartner} />) }
+                  { this.props.isEditingPage && <Button onClick={this.addPartner}>Add partner</Button> }
+                </div>
+              </div>
+            </Section>
+          }
 
-          <Section id="participants">
-            <header className="text-center">
-              <Title level="h2" content={ content["participants-title"] } onSave={this.saveHandler('participants-title')} />
-            </header>
-            <Participants participants={participants} isEditingPage={this.props.isEditingPage} onSave={this.editParticipant} onDelete={this.deleteParticipant}/>
-            { this.props.isEditingPage && <Button onClick={this.addParticipant}>Add participant</Button> }
-          </Section>
+          {
+            (Boolean(participants.length) || this.props.isEditingPage) &&
+            <Section id="participants">
+              <header className="text-center">
+                <Title level="h2" content={ content["participants-title"] } onSave={this.saveHandler('participants-title')} />
+              </header>
+              <Participants participants={participants} isEditingPage={this.props.isEditingPage} onSave={this.editParticipant} onDelete={this.deleteParticipant}/>
+              { this.props.isEditingPage && <Button onClick={this.addParticipant}>Add participant</Button> }
+            </Section>
+          }
 
         </main>
 
@@ -349,23 +354,6 @@ export const query = graphql`
           title
           slug
           tech
-          content
-        }
-      }
-    }
-    allPartners {
-      edges {
-        node {
-          id
-          partnership_level
-          content
-        }
-      }
-    }
-    allParticipants {
-      edges {
-        node {
-          id
           content
         }
       }

@@ -8,7 +8,7 @@ import Navigation from "../components/navigation/Navigation";
 import Footer from "../components/navigation/Footer";
 
 import "../assets/sass/custom.scss";
-import favicon from "../assets/images/icon.png";
+import favicon from "../assets/images/favicons/favicon-128.png";
 
 const styles = {
   container: {
