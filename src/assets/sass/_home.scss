@@ -1,5 +1,6 @@
 section#landing {
   padding-top: $lg-spacing;
+  padding-bottom: $lg-spacing;
   @include background-pattern;
 
   .image-container {
