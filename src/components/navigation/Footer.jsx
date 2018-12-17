@@ -36,7 +36,7 @@ const Footer = props => {
                 <p>Tracks</p>
                 <ul>
                 {
-                  tracks.map(track => <li key={track.node.slug}><Link to={track.node.slug}>{track.node.tech}</Link></li>)
+                  tracks.map(track => <li key={track.node.slug}><Link to={track.node.slug}>{track.node.title}</Link></li>)
                 }
                 </ul>
               </Grid>

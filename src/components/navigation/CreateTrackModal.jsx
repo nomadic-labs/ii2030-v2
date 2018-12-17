@@ -42,7 +42,7 @@ class CreateTrackModal extends React.Component {
         title: "",
         tech: "",
         order: 0,
-        year: 2017,
+        year: 2019,
       }
     };
     this.updatePage = (field, value) => {
@@ -63,7 +63,7 @@ class CreateTrackModal extends React.Component {
   }
 
   _onSubmit() {
-    const slugifiedTitle = slugify(this.state.page.tech, {
+    const slugifiedTitle = slugify(this.state.page.title, {
       lower: true,
       remove: /[$*_+~.,()'"!\-:@%^&?=]/g
     })
@@ -76,7 +76,7 @@ class CreateTrackModal extends React.Component {
       template: "track.js",
       navigation: {
         order: parseInt(this.state.page.order),
-        displayTitle: this.state.page.tech,
+        displayTitle: this.state.page.title,
       },
       content: defaultContentJSON
     };

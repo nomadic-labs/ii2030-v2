@@ -236,7 +236,7 @@ export function saveTrackData(trackId, field, content) {
       [field]: content
     };
 
-    db.ref(`tracks/${trackId}`).set(data).then(res => {
+    db.ref(`tracks/${trackId}`).update(data).then(res => {
       dispatch(updatePageData({ [field]: content }));
       dispatch(
         showNotification(

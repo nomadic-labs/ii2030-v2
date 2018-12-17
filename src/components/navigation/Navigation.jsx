@@ -72,7 +72,7 @@ class TracksDropdown extends React.Component {
           onClose={this.handleClose}
         >
           {
-            orderedTracks.map(track => <MenuItem onClick={this.handleClose} key={track.node.slug} component={Link} to={track.node.slug} style={styles.menuItem}>{track.node.tech}</MenuItem>)
+            orderedTracks.map(track => <MenuItem onClick={this.handleClose} key={track.node.slug} component={Link} to={track.node.slug} style={styles.menuItem}>{track.node.title}</MenuItem>)
           }
         </Menu>
       </div>
@@ -159,7 +159,7 @@ class Navigation extends React.Component {
             </Grid>
             <Grid item>
               <Toolbar>
-                <Button to={'/#/'} component={Link} color="secondary" variant="contained" className="menu-heading btn orange animate">Registration coming soon</Button>
+                <Button to={'/#/'} component={Link} color="secondary" variant="contained" className="menu-heading btn orange animate">Application coming soon</Button>
               </Toolbar>
             </Grid>
           </Grid>
