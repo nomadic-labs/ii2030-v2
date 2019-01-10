@@ -36,29 +36,25 @@ export default class TimelineSlider extends React.Component {
 
     return(
       <div className="tour-stops-container">
-        <Slider {...settings} infinite={false} ref={slider => (this.slider = slider)}>
+        <Grid container justify="center">
           {
             map(slides, (slide, i) => {
               return(
-                <div className="slide" key={`timeline-slide-${i}`}>
-                  <Grid container justify="center">
-                    <Grid item xs={12} md={8}>
-                      <div className="content-container">
-                        { slide["image"] &&
-                          <div className="image">
-                            <Image content={ slide["image"] } onSave={ onSavePassthrough(i, "image") } />
-                          </div>
-                        }
-                        <Title content={ slide["heading"] } onSave={ onSavePassthrough(i, "heading") } />
-                        <Paragraph content={ slide["description"] } onSave={ onSavePassthrough(i, "description") } />
+                <Grid item xs={12} md={4} key={`timeline-slide-${i}`}>
+                  <div className="content-container">
+                    { slide["image"] &&
+                      <div className="image">
+                        <Image content={ slide["image"] } onSave={ onSavePassthrough(i, "image") } />
                       </div>
-                    </Grid>
-                  </Grid>
-                </div>
+                    }
+                    <Title content={ slide["heading"] } onSave={ onSavePassthrough(i, "heading") } />
+                    <Paragraph content={ slide["description"] } onSave={ onSavePassthrough(i, "description") } />
+                  </div>
+                </Grid>
               )
             })
           }
-        </Slider>
+        </Grid>
       </div>
     )
   }

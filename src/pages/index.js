@@ -188,7 +188,6 @@ class HomePage extends React.Component {
                     <div className="vert-spacing">
                       <Paragraph content={ content["landing-subtitle"] } onSave={this.saveHandler('landing-subtitle')} />
                     </div>
-                    <Button component={Link} to="#overview" className="btn orange animate">Learn more</Button>
                   </div>
                 </Grid>
                 <Grid item xs={12} md={6} className="pure-u-1 pure-u-md-1-2 image-container">

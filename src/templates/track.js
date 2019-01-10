@@ -102,8 +102,8 @@ class TrackTemplate extends React.Component {
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <div className="track-icon image-container vert-spacing">
-                    <Image content={ content["icon"] } onSave={this.onSave('icon')} />
-                    { this.props.isEditingPage && <Image content={ content["icon-small"] } onSave={this.onSave('icon-small')} /> }
+                    <Image content={ content["icon"] } onSave={this.onSave('icon')} helpText="This is the main icon for this track (solid background)" />
+                    { this.props.isEditingPage && <Image content={ content["icon-small"] } onSave={this.onSave('icon-small')} helpText="This is the secondary icon for this track (transparent background). It will appear on the home page." /> }
                   </div>
                 </Grid>
               </Grid>
