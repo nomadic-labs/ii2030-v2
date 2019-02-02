@@ -85,6 +85,7 @@ class TrackTemplate extends React.Component {
     const content = this.props.pageData ? this.props.pageData.content : {};
     const tourStops = content["tour-stops"] || [];
     const introSlides = content["intro-slides"] || [];
+    const showTourStops = false;
 
     return (
       <Layout>
@@ -124,7 +125,7 @@ class TrackTemplate extends React.Component {
                   <Grid container>
                     <Grid item xs={12} md={6}>
                       <div className="image-container">
-                        <Image content={content["track-lead-image"]} className="pure-img" onSave={this.onSave("track-lead-image")} />
+                        <Image content={content["track-lead-image"]} className="pure-img" onSave={this.onSave("track-lead-image")} styles={{ image: { width: 'unset' }}} />
                       </div>
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -174,6 +175,7 @@ class TrackTemplate extends React.Component {
                     </div>
                   </section>
 
+                  { showTourStops &&
                   <section id="tour-stops">
                     <header className="text-center">
                       <Title level="headline" content={ content["tour-stops-title"] } onSave={this.onSave('tour-stops-title')} />
@@ -184,6 +186,7 @@ class TrackTemplate extends React.Component {
 
                     <TourStops slides={tourStops} onSave={this.onSave("tour-stops")} />
                   </section>
+                }
 
                 </div>
 

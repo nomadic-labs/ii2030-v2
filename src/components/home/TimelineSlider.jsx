@@ -36,7 +36,7 @@ export default class TimelineSlider extends React.Component {
 
     return(
       <div className="tour-stops-container">
-        <Grid container justify="center">
+        <Grid container justify="center" spacing={24}>
           {
             map(slides, (slide, i) => {
               return(

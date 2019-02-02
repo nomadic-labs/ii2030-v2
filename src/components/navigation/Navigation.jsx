@@ -125,10 +125,10 @@ class OverviewDropdown extends React.Component {
           onClose={this.handleClose}
         >
           <MenuItem onClick={this.handleClose} style={styles.menuItem} component={Link} to={"/#overview"}>Event overview</MenuItem>
-          <MenuItem onClick={this.handleClose} style={styles.menuItem} component={Link} to={"/#timeline"}>Timeline</MenuItem>
+          <MenuItem onClick={this.handleClose} style={styles.menuItem} component={Link} to={"/#testimonials"}>Testimonials</MenuItem>
           <MenuItem onClick={this.handleClose} style={styles.menuItem} component={Link} to={"/#tracks"}>Tracks</MenuItem>
-          <MenuItem onClick={this.handleClose} style={styles.menuItem} component={Link} to={"/#agenda"}>Program</MenuItem>
           <MenuItem onClick={this.handleClose} style={styles.menuItem} component={Link} to={"/#cocreation_process"}>Process</MenuItem>
+          <MenuItem onClick={this.handleClose} style={styles.menuItem} component={Link} to={"/#agenda"}>Program</MenuItem>
           <MenuItem onClick={this.handleClose} style={styles.menuItem} component={Link} to={"/#partners"}>Partners</MenuItem>
         </Menu>
       </div>

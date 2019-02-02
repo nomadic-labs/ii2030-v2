@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import { connect } from "react-redux";
 import {
   updatePage,
@@ -211,7 +211,7 @@ class HomePage extends React.Component {
             <OverviewSlides slides={content["overview-slides"]} onSave={this.saveHandler("overview-slides")} />
           </Section>
 
-          <Section id="timeline">
+          <Section id="testimonials">
             <header className="text-center">
               <Title level="h2" content={ content["timeline-title"] } onSave={this.saveHandler('timeline-title')} />
             </header>
