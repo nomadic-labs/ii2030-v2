@@ -159,7 +159,7 @@ class Navigation extends React.Component {
             </Grid>
             <Grid item>
               <Toolbar>
-                <Button to={'/#/'} component={Link} color="secondary" variant="contained" className="menu-heading btn orange animate">Application coming soon</Button>
+                <Button component={'a'} href={'https://forms.office.com/Pages/ResponsePage.aspx?id=6keLY1uBlEy19nS9EWipCDnPPM9g_fVEhUt648EZIoBUQlpNWE9TODI4U1ZWQVZQWTMwSk1VWjVGUi4u'} color="secondary" variant="contained" className="menu-heading btn orange animate">Join now!</Button>
               </Toolbar>
             </Grid>
           </Grid>

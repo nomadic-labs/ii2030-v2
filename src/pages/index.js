@@ -15,6 +15,7 @@ import Section from "../layouts/Section";
 import Title from "../components/editables/Title";
 import Paragraph from "../components/editables/Paragraph";
 import Image from "../components/editables/Image";
+import EmbeddedIframe from "../components/editables/EmbeddedIframe";
 
 import OverviewSlides from "../components/home/OverviewSlides"
 import TimelineSlider from "../components/home/TimelineSlider"
@@ -286,6 +287,20 @@ class HomePage extends React.Component {
               <Title level="h2" content={ content["agenda-title"] } onSave={this.saveHandler('agenda-title')} />
             </header>
             <ProgramSlider content={content} saveHandler={this.saveHandler} />
+          </Section>
+
+          <Section id="team">
+            <header className="text-center">
+              <Title level="h2" content={ content["team-title"] } onSave={this.saveHandler('team-title')} />
+              <div className="headline vert-spacing">
+                <span className="headline-container">
+                  <Paragraph content={ content["team-subtitle"] } onSave={this.saveHandler('team-subtitle')} />
+                </span>
+              </div>
+            </header>
+            <div className="iframe-container">
+              <EmbeddedIframe content={ content["team-video"] } onSave={this.saveHandler('team-video')} />
+            </div>
           </Section>
 
           {
