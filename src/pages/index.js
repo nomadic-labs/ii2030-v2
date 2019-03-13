@@ -289,20 +289,6 @@ class HomePage extends React.Component {
             <ProgramSlider content={content} saveHandler={this.saveHandler} />
           </Section>
 
-          <Section id="team">
-            <header className="text-center">
-              <Title level="h2" content={ content["team-title"] } onSave={this.saveHandler('team-title')} />
-              <div className="headline vert-spacing">
-                <span className="headline-container">
-                  <Paragraph content={ content["team-subtitle"] } onSave={this.saveHandler('team-subtitle')} />
-                </span>
-              </div>
-            </header>
-            <div className="iframe-container">
-              <EmbeddedIframe content={ content["team-video"] } onSave={this.saveHandler('team-video')} />
-            </div>
-          </Section>
-
           {
             (Boolean(cohosts.length) || Boolean(partners.length) || this.props.isEditingPage) &&
             <Section id="partners">
