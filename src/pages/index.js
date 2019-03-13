@@ -192,7 +192,9 @@ class HomePage extends React.Component {
                   </div>
                 </Grid>
                 <Grid item xs={12} md={6} className="pure-u-1 pure-u-md-1-2 image-container">
-                  <Image content={ content["landing-image"] } onSave={this.saveHandler('landing-image')} />
+                  <div className="iframe-container">
+                    <EmbeddedIframe content={ content["team-video"] } onSave={this.saveHandler('team-video')} />
+                  </div>
                 </Grid>
               </Grid>
             </div>
