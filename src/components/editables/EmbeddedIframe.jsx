@@ -4,16 +4,6 @@ import PropTypes from "prop-types";
 import Editable from "./Editable";
 import EmbeddedIframeEditor from "../editingTools/EmbeddedIframeEditor";
 
-const styles = {
-  video: {
-    position: "relative",
-    paddingBottom: "56.25%",
-    height: "0",
-    maxWidth: "740px",
-    width: "100vw",
-  }
-}
-
 const EmbeddedIframe = ({ className, ...props }) => {
   const handleSave = newContent => {
     props.onSave(newContent);
@@ -32,6 +22,7 @@ const EmbeddedIframe = ({ className, ...props }) => {
     >
       <div className="video">
         <iframe
+          title="ii2030 Video"
           src={ src }
           height="284"
           width="504"

@@ -14,7 +14,6 @@ import Layout from "../layouts/default.js";
 import Section from "../layouts/Section";
 import Title from "../components/editables/Title";
 import Paragraph from "../components/editables/Paragraph";
-import Image from "../components/editables/Image";
 import EmbeddedIframe from "../components/editables/EmbeddedIframe";
 
 import OverviewSlides from "../components/home/OverviewSlides"
@@ -67,13 +66,11 @@ class HomePage extends React.Component {
   };
 
   addPartner = () => {
-    const partnerArray = [...this.props.pageData.content.partners]
+    const partnerArray = this.props.pageData.content.partners ? [...this.props.pageData.content.partners] : [];
     const newPartner = {
       "logo" : {
-        "imageSrc" : "/icon.png"
-      },
-      "name" : {
-        "text" : "Placeholder"
+        "imageSrc" : "/icon.png",
+        "caption" : "Organization name"
       }
     }
 
@@ -100,13 +97,11 @@ class HomePage extends React.Component {
   };
 
   addCohost = () => {
-    const arr = [...this.props.pageData.content.cohosts]
+    const arr = this.props.pageData.content.cohosts ? [...this.props.pageData.content.cohosts] : [];
     const updated = {
       "logo" : {
-        "imageSrc" : "/icon.png"
-      },
-      "name" : {
-        "text" : "Placeholder"
+        "imageSrc" : "/icon.png",
+        "caption" : "Organization name"
       }
     }
 
@@ -133,13 +128,11 @@ class HomePage extends React.Component {
   };
 
   addParticipant = () => {
-    const arr = [...this.props.pageData.content.participants]
+    const arr = this.props.pageData.content.participants ? [...this.props.pageData.content.participants] : [];
     const newParticipant = {
       "logo" : {
-        "imageSrc" : "/icon.png"
-      },
-      "name" : {
-        "text" : "Placeholder"
+        "imageSrc" : "/icon.png",
+        "caption": "Organization name"
       },
       "link" : {
         "text" : "http://endeva.org/"

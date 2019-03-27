@@ -60,7 +60,7 @@ const StyledImageEditor = withStyles(styles)(props => {
       </Grid>
       {props.editCaption && (
         <div className="form-group">
-          Caption:{" "}
+          Alt text:{" "}
           <input
             className="form-control"
             name="caption"

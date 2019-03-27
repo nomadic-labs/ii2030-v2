@@ -29,12 +29,15 @@ const Participants = ({ participants, onSave, onDelete, isEditingPage }) => {
       {collection.map((participant, i) => {
         return(
           <div className="slide" key={`participant-${i}`}>
-            <a href={ participant["link"] ? participant["link"]["text"] : null } target="_blank" rel="noopener noreferrer">
-              <Image content={ participant["logo"] } onSave={onSavePassthrough(i, "logo")} />
-            </a>
+            {
+              isEditingPage ?
+              <Image content={ participant["logo"] } onSave={onSavePassthrough(i, "logo")} showCaption={false} editCaption={true} /> :
+              <a href={ participant["link"] ? participant["link"]["text"] : null } target="_blank" rel="noopener noreferrer">
+                <Image content={ participant["logo"] } onSave={onSavePassthrough(i, "logo")} showCaption={false} editCaption={true} />
+              </a>
+            }
             { isEditingPage &&
               <div>
-                <PlainText content={ participant["name"] } onSave={onSavePassthrough(i, "name")} />
                 <PlainText content={ participant["link"] } onSave={onSavePassthrough(i, "link")} />
                 <Button onClick={onDelete(i)}>Delete</Button>
               </div>
