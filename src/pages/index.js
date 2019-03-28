@@ -293,15 +293,15 @@ class HomePage extends React.Component {
               <div className="host partner-group headline">
                 <Typography variant="display3">An <a href="http://www.endeva.org/" target="_blank" rel="noopener noreferrer"><img id="endeva-logo" src={endevaLogo} alt="Endeva logo" /></a> initiative</Typography>
               </div>
-                <div className="partner-group">
-                  <div className="headline">
-                    <Typography variant="display3">Co-hosted by </Typography>
-                  </div>
-                  <div className="logos">
-                    { cohosts.map((entity, i) => <LogoDisplay key={`cohost-${i}`} index={i} entity={entity} onDelete={this.props.isEditingPage ? this.deleteCohost : null} onSave={this.editCohost} />) }
-                    { this.props.isEditingPage && <Button onClick={this.addCohost}>Add cohost</Button> }
-                  </div>
+              <div className="partner-group">
+                <div className="headline">
+                  <Typography variant="display3">Co-hosted by </Typography>
                 </div>
+                <div className="logos">
+                  { cohosts.map((entity, i) => <LogoDisplay key={`cohost-${i}`} index={i} entity={entity} onDelete={this.props.isEditingPage ? this.deleteCohost : null} onSave={this.editCohost} />) }
+                  { this.props.isEditingPage && <Button onClick={this.addCohost}>Add cohost</Button> }
+                </div>
+              </div>
               <div className="partner-group">
                 <div className="headline">
                   <Typography variant="display3">Partners</Typography>

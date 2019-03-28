@@ -124,8 +124,8 @@ class ImageEditor extends React.Component {
   render() {
     return (
       <StyledImageEditor
-        {...this.state}
         {...this.props}
+        {...this.state}
         handleCaptionChange={this.handleCaptionChange}
         handleImageChange={this.handleImageChange}
       />
