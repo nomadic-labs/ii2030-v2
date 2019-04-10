@@ -39,6 +39,7 @@ class PlainTextEditor extends React.Component {
         style={styles.input}
         value={text}
         onChange={this.handleEditorChange}
+        placeholder={this.props.placeholder}
       />
     );
   }
