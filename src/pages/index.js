@@ -15,6 +15,7 @@ import Section from "../layouts/Section";
 import Title from "../components/editables/Title";
 import Paragraph from "../components/editables/Paragraph";
 import EmbeddedIframe from "../components/editables/EmbeddedIframe";
+import PlainText from "../components/editables/PlainText";
 
 import OverviewSlides from "../components/home/OverviewSlides"
 import TimelineSlider from "../components/home/TimelineSlider"
@@ -295,7 +296,9 @@ class HomePage extends React.Component {
               </div>
               <div className="partner-group">
                 <div className="headline">
-                  <Typography variant="display3">Partners</Typography>
+                  <Typography variant="display3">
+                    <PlainText content={ content["partners-subheader"] } onSave={this.saveHandler('partners-subheader')} />
+                  </Typography>
                 </div>
                 <div className="logos">
                   { partners.map((entity, i) => <LogoDisplay key={`partner-${i}`} index={i} entity={entity} onDelete={this.props.isEditingPage ? this.deletePartner : null} onSave={this.editPartner} />) }

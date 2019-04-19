@@ -7,19 +7,17 @@ import {
   loadPageData,
 } from "../redux/actions";
 
-import Grid from "@material-ui/core/Grid"
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 
 import Layout from "../layouts/default.js";
 import Section from "../layouts/Section";
 import Title from "../components/editables/Title";
 import Paragraph from "../components/editables/Paragraph";
 import Image from "../components/editables/Image";
-
-import tourImage from "../assets/images/tour-detailed.png"
-import factoryImage from "../assets/images/factory-detailed.png"
+import PlainText from "../components/editables/PlainText";
 
 import IntroSlides from "../components/track/IntroSlides"
-import TourStops from "../components/track/TourStops"
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -80,16 +78,57 @@ class TrackTemplate extends React.Component {
     this.props.onUpdateTrackData(id, "title", content.text)
   }
 
+  addTrackLead = () => {
+    const newArr = this.props.pageData.content["track-leads"] ? [...this.props.pageData.content["track-leads"]] : [];
+    const { id } = this.props.data.tracks;
+
+    const newItem = {
+      "track-lead-image" : {
+        "imageSrc" : "/icon.png",
+      },
+      "track-lead-name": {
+        "text": "Name"
+      },
+      "track-lead-quote": {
+        "text": "Quote"
+      }
+    }
+
+    newArr.push(newItem)
+    this.props.onUpdateTrackContent(id, "track-leads", newArr)
+  };
+
+  editTrackLead = (index, field) => content => {
+    const arr = [...this.props.pageData.content["track-leads"]];
+    const { id } = this.props.data.tracks;
+
+    const updated = {
+      ...arr[index],
+      [field]: content
+    };
+
+    arr[index] = updated;
+
+    this.props.onUpdateTrackContent(id, "track-leads", arr);
+  };
+
+  deleteTrackLead = i => () => {
+    const arr = [...this.props.pageData.content["track-leads"]];
+    const { id } = this.props.data.tracks;
+
+    arr.splice(i, 1)
+    this.props.onUpdateTrackContent(id, "track-leads", arr)
+  };
+
   render() {
     const title = this.props.pageData ? this.props.pageData.title : "";
     const content = this.props.pageData ? this.props.pageData.content : {};
-    const tourStops = content["tour-stops"] || [];
     const introSlides = content["intro-slides"] || [];
-    const showTourStops = false;
+    const trackLeads = content["track-leads"] || [];
 
     return (
       <Layout>
-        <main>
+        <main style={{ paddingBottom: 0 }}>
           <Section id="track-landing">
             <div className="outer-container">
               <Grid container>
@@ -118,123 +157,52 @@ class TrackTemplate extends React.Component {
             </div>
           </Section>
 
-          {
-            (content["track-lead-name"] || this.props.isEditingPage) &&
-            <Section id="track-lead" className="background-container">
-              <div className="track-lead">
-                  <Grid container>
-                    <Grid item xs={12} md={6}>
-                      <div className="image-container">
-                        <Image content={content["track-lead-image"]} className="pure-img" onSave={this.onSave("track-lead-image")} styles={{ image: { width: 'unset' }}} />
-                      </div>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                      <div className="text vert-spacing horiz-spacing">
-                        <h3>Track lead</h3>
-                        <Paragraph content={content["track-lead-name"]} onSave={this.onSave("track-lead-name")} />
-                        <div className="quote">
-                          <Paragraph content={content["track-lead-quote"]} onSave={this.onSave("track-lead-quote")} />
+
+          <Section id="track-lead" className="background-container vert-spacing">
+            <header className="text-center vert-spacing">
+              <Title level="h2" content={ content["track-lead-title"] } onSave={this.onSave('track-lead-title')} />
+            </header>
+
+            {
+              trackLeads.map((lead, index) => {
+                return (
+                  <div className="track-lead vert-spacing" key={`track-lead-${index}`}>
+                    <Grid container>
+                      <Grid item xs={12} md={6}>
+                        <div className="image-container vert-spacing">
+                          <Image
+                            content={lead["track-lead-image"]}
+                            className="pure-img"
+                            onSave={this.editTrackLead(index, "track-lead-image")}
+                            styles={{ image: { width: 'unset', borderRadius: "50%" }}}
+                          />
                         </div>
-                      </div>
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <div className="text vert-spacing horiz-spacing">
+                          <h3>
+                            <PlainText content={lead["track-lead-name"]} onSave={this.editTrackLead(index, "track-lead-name")} />
+                          </h3>
+                          <div className="quote">
+                            <Paragraph content={lead["track-lead-quote"]} onSave={this.editTrackLead(index, "track-lead-quote")} />
+                          </div>
+                        </div>
+                        {
+                          this.props.isEditingPage &&
+                          <div className="text vert-spacing horiz-spacing">
+                            <Button onClick={this.deleteTrackLead(index)}>Delete implementation partner</Button>
+                          </div>
+                        }
+                      </Grid>
                     </Grid>
-                  </Grid>
-              </div>
-            </Section>
-          }
+                  </div>
+                )
+              })
+            }
 
-          <Section id="tour-factory">
-
-            <Grid container>
-              <Grid item xs={12}>
-                <div id="tour">
-                  <section className="intro">
-                    <header className="text-center">
-                      <Title level="h2" content={ content["tour-title"] } onSave={this.onSave('tour-title')} />
-                      <div className="headline vert-spacing">
-                        <Paragraph content={ content["tour-subtitle"] } onSave={this.onSave('tour-subtitle')} />
-                      </div>
-                    </header>
-
-                    <div className="outer-container">
-                      <Grid container>
-                        <Grid item xs={12} md={6}>
-                          <div className="vert-center horiz-center">
-                            <div className="image oversize">
-                              <img src={tourImage} alt="ii2030" className="pure-img" />
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                          <div className="vert-center slide-container">
-                            <div className="slide text horiz-spacing vert-spacing">
-                              <Paragraph content={ content["tour-description"] } onSave={this.onSave('tour-description')} />
-                            </div>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </div>
-                  </section>
-
-                  { showTourStops &&
-                  <section id="tour-stops">
-                    <header className="text-center">
-                      <Title level="headline" content={ content["tour-stops-title"] } onSave={this.onSave('tour-stops-title')} />
-                      <div className="headline vert-spacing">
-                        <Paragraph content={ content["tour-stops-subtitle"] } onSave={this.onSave('tour-stops-subtitle')} />
-                      </div>
-                    </header>
-
-                    <TourStops slides={tourStops} onSave={this.onSave("tour-stops")} />
-                  </section>
-                }
-
-                </div>
-
-              </Grid>
-
-              <Grid item xs={12}>
-                <div id="factory">
-                  <section className="intro">
-                    <header className="text-center">
-                      <Title level="h2" content={ content["factory-title"] } onSave={this.onSave('factory-title')} />
-                      <div className="headline vert-spacing">
-                        <Paragraph content={ content["factory-subtitle"] } onSave={this.onSave('factory-subtitle')} />
-                      </div>
-                    </header>
-
-                    <div className="outer-container">
-                      <Grid container>
-                        <Grid item xs={12} md={6}>
-                          <div className="vert-center horiz-center">
-                            <div className="image oversize">
-                              <img src={factoryImage} alt="ii2030" className="pure-img" />
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                          <div className="vert-center slide-container">
-                            <div className="slide text horiz-spacing vert-spacing">
-                              <Paragraph content={ content["factory-description"] } onSave={this.onSave('factory-description')} />
-                            </div>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </div>
-                  </section>
-
-                  <section id="factory-outputs">
-                    <header className="text-center">
-                      <Title level="headline" content={ content["factory-outputs-title"] } onSave={this.onSave('factory-outputs-title')} />
-                    </header>
-                    <div className="text horiz-spacing">
-                      <Paragraph content={ content["factory-outputs-description"] } onSave={this.onSave('factory-outputs-description')} />
-                    </div>
-                  </section>
-                </div>
-              </Grid>
-            </Grid>
-
+            { this.props.isEditingPage && <Button onClick={this.addTrackLead}>Add implementation partner</Button> }
           </Section>
+
         </main>
       </Layout>
     );

@@ -23,7 +23,7 @@ const Footer = props => {
               <Grid item xs={12} md={4}>
                 <p>Overview</p>
                 <ul>
-                  <li><Link to={"/#overview"}>Event overview</Link></li>
+                  <li><Link to={"/#overview"}>ii2030 overview</Link></li>
                   <li><Link to={"/#timeline"}>Timeline</Link></li>
                   <li><Link to={"/#tracks"}>Tracks</Link></li>
                   <li><Link to={"/#agenda"}>Program</Link></li>
