@@ -157,51 +157,52 @@ class TrackTemplate extends React.Component {
             </div>
           </Section>
 
+          { (trackLeads.length > 0) &&
+            <Section id="track-lead" className="background-container vert-spacing">
+              <header className="text-center vert-spacing">
+                <Title level="h2" content={ content["track-lead-title"] } onSave={this.onSave('track-lead-title')} />
+              </header>
 
-          <Section id="track-lead" className="background-container vert-spacing">
-            <header className="text-center vert-spacing">
-              <Title level="h2" content={ content["track-lead-title"] } onSave={this.onSave('track-lead-title')} />
-            </header>
-
-            {
-              trackLeads.map((lead, index) => {
-                return (
-                  <div className="track-lead vert-spacing" key={`track-lead-${index}`}>
-                    <Grid container>
-                      <Grid item xs={12} md={6}>
-                        <div className="image-container vert-spacing">
-                          <Image
-                            content={lead["track-lead-image"]}
-                            className="pure-img"
-                            onSave={this.editTrackLead(index, "track-lead-image")}
-                            styles={{ image: { width: 'unset', borderRadius: "50%" }}}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <div className="text vert-spacing horiz-spacing">
-                          <h3>
-                            <PlainText content={lead["track-lead-name"]} onSave={this.editTrackLead(index, "track-lead-name")} />
-                          </h3>
-                          <div className="quote">
-                            <Paragraph content={lead["track-lead-quote"]} onSave={this.editTrackLead(index, "track-lead-quote")} />
+              {
+                trackLeads.map((lead, index) => {
+                  return (
+                    <div className="track-lead vert-spacing" key={`track-lead-${index}`}>
+                      <Grid container>
+                        <Grid item xs={12} md={6}>
+                          <div className="image-container vert-spacing">
+                            <Image
+                              content={lead["track-lead-image"]}
+                              className="pure-img"
+                              onSave={this.editTrackLead(index, "track-lead-image")}
+                              styles={{ image: { width: 'unset', borderRadius: "50%" }}}
+                            />
                           </div>
-                        </div>
-                        {
-                          this.props.isEditingPage &&
+                        </Grid>
+                        <Grid item xs={12} md={6}>
                           <div className="text vert-spacing horiz-spacing">
-                            <Button onClick={this.deleteTrackLead(index)}>Delete implementation partner</Button>
+                            <h3>
+                              <PlainText content={lead["track-lead-name"]} onSave={this.editTrackLead(index, "track-lead-name")} />
+                            </h3>
+                            <div className="quote">
+                              <Paragraph content={lead["track-lead-quote"]} onSave={this.editTrackLead(index, "track-lead-quote")} />
+                            </div>
                           </div>
-                        }
+                          {
+                            this.props.isEditingPage &&
+                            <div className="text vert-spacing horiz-spacing">
+                              <Button onClick={this.deleteTrackLead(index)}>Delete implementation partner</Button>
+                            </div>
+                          }
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </div>
-                )
-              })
-            }
+                    </div>
+                  )
+                })
+              }
 
-            { this.props.isEditingPage && <Button onClick={this.addTrackLead}>Add implementation partner</Button> }
-          </Section>
+              { this.props.isEditingPage && <Button onClick={this.addTrackLead}>Add implementation partner</Button> }
+            </Section>
+          }
 
         </main>
       </Layout>
