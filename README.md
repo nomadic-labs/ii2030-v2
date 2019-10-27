@@ -1,4 +1,3 @@
-# Connecting the Dots
-
+# ii2030 Event Website
 
 
